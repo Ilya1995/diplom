@@ -1,2 +1,7 @@
 node_modules
 .idea/
+typings
+app/**/*.js
+app/**/*.js.map
+npm-debug.log*
+.DS_store

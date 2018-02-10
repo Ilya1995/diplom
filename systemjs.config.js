@@ -29,11 +29,11 @@
             },
             rxjs: {
                 defaultExtension: 'js'
-            },
-            'angular-in-memory-web-api': {
-                main: './index.js',
-                defaultExtension: 'js'
             }
+            // 'angular-in-memory-web-api': {
+            //     main: './index.js',
+            //     defaultExtension: 'js'
+            // }
         }
     });
 })(this);
