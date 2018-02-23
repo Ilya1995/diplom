@@ -1,0 +1,219 @@
+@charset "utf-8";
+@import url(http://weloveiconfonts.com/api/?family=fontawesome);
+
+
+.btn-medium {
+    width: 40%;
+}
+.btn-small {
+    font-size: 10px;
+    padding: 5px;
+    width: 35%;
+}
+.btn-indent {
+    margin-top: 10px;
+    padding: 12px 20px;
+}
+.btn-l {
+    float: left;
+}
+.btn-r {
+    float: right;
+}
+.re-captcha {
+    margin: 20px 1px 1px 70px;
+}
+
+.text-label {
+    padding-top: 10px;
+}
+.scrol-table{
+    height:230px;
+    width:490px;
+    overflow: scroll;
+}
+a {
+    cursor: pointer;
+}
+
+/****************************Голубая кнопка********************************/
+.reg-form {
+    padding-top: 120px;
+}
+.footer .btn-blue,
+#login-form .btn-blue {
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration:none;
+    color:#fff;
+    font-size: 14px;
+    position:relative;
+    text-align: center;
+    border-left:solid 1px #198d98;
+    /*margin-left:35px;*/
+    background: #1dabb8;
+    -webkit-border-top-right-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0px 1px 0px #2ab7ec, 0px 5px 0px 0px #156785, 0px 10px 5px #999;
+    -moz-box-shadow: inset 0px 1px 0px #2ab7ec, 0px 5px 0px 0px #156785, 0px 10px 5px #999;
+    -o-box-shadow: inset 0px 1px 0px #2ab7ec, 0px 5px 0px 0px #156785, 0px 10px 5px #999;
+    box-shadow: inset 0px 1px 0px #2ab7ec, 0px 5px 0px 0px #156785, 0px 10px 5px #999;
+}
+.footer .btn-blue:hover,
+#login-form .btn-blue:hover{
+    background: #198d98;
+}
+.footer .btn-blue:active,
+#login-form .btn-blue:active {
+    top:3px;
+    background: #198d98;
+    -webkit-box-shadow: inset 0px 1px 0px #2ab7ec, 0px 2px 0px 0px #156785, 0px 5px 3px #999;
+    -moz-box-shadow: inset 0px 1px 0px #2ab7ec, 0px 2px 0px 0px #156785, 0px 5px 3px #999;
+    -o-box-shadow: inset 0px 1px 0px #2ab7ec, 0px 2px 0px 0px #156785, 0px 5px 3px #999;
+    box-shadow: inset 0px 1px 0px #2ab7ec, 0px 2px 0px 0px #156785, 0px 5px 3px #999;
+}
+.footer .btn-blue:active::before,
+#login-form .btn-blue:active::before {
+    top:-3px;
+    -webkit-box-shadow:inset 0px 1px 0px #2ab7ec, 0px 5px 0px 0px #032b3a, 1px 1px 0px 0px #044a64, 2px 2px 0px 0px #044a64, 2px 5px 0px 0px #044a64, 6px 4px 2px #0b698b, 0px 10px 5px #999 ;
+    -moz-box-shadow:inset 0px 1px 0px #2ab7ec, 0px 5px 0px 0px #032b3a, 1px 1px 0px 0px #044a64, 2px 2px 0px 0px #044a64, 2px 5px 0px 0px #044a64, 6px 4px 2px #0b698b, 0px 10px 5px #999 ;
+    -o-box-shadow:inset 0px 1px 0px #2ab7ec, 0px 5px 0px 0px #032b3a, 1px 1px 0px 0px #044a64, 2px 2px 0px 0px #044a64, 2px 5px 0px 0px #044a64, 6px 4px 2px #0b698b, 0px 10px 5px #999 ;
+    box-shadow:inset 0px 1px 0px #2ab7ec, 0px 5px 0px 0px #032b3a, 1px 1px 0px 0px #044a64, 2px 2px 0px 0px #044a64, 2px 5px 0px 0px #044a64, 6px 4px 2px #0b698b, 0px 10px 5px #999 ;
+}
+
+/*********************форма авторизации********************/
+#login-form [class*="fontawesome-"]:before {
+    font-family: 'FontAwesome', sans-serif;
+}
+#login-form .span {
+    background-color: #363b41;
+    border-radius: 3px 0px 0px 3px;
+    color: #606468;
+    display: block;
+    float: left;
+    height: 38px;
+    line-height: 50px;
+    text-align: center;
+    width: 50px;
+}
+#login-form {
+    margin: 0 76% auto;
+    width: 300px;
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
+}
+#login-form h1 { margin: 0; }
+#login-form a {
+    color: #999;
+    text-decoration: none;
+}
+#login-form fieldset {
+    border: none;
+    margin: 0;
+}
+#login-form input {
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
+    margin: 0;
+    outline: none;
+}
+#login-form input[type="submit"] { cursor: pointer; }
+#login-form input[type="submit"]:hover { background: #198d98; }
+#login-form .clearfix { *zoom: 1; }
+#login-form .clearfix:before, .clearfix:after {
+    content: "";
+    display: table;
+}
+#login-form .clearfix:after { clear: both; }
+#login-form h1 {
+    background-color: #282830;
+    border-radius: 10px 10px 0 0;
+    color: #fff;
+    font-size: 14px;
+    padding: 20px;
+    text-align: center;
+    text-transform: uppercase;
+}
+#login-form fieldset {
+    background: #fff;
+    border-radius: 0 0 5px 5px;
+    padding: 20px;
+    position: relative;
+}
+#login-form fieldset:before {
+    background-color: #fff;
+    content: "";
+    height: 8px;
+    left: 50%;
+    margin: -4px 0 0 -4px;
+    position: absolute;
+    top: 0;
+    transform: rotate(45deg);
+    width: 8px;
+}
+#login-form input {
+    font-size: 14px;
+}
+#login-form input[type="text"],
+#login-form input[type="password"] {
+    border: 1px solid #dcdcdc;
+    padding: 10px 10px;
+    width: 180px;
+}
+#login-form input[type="text"] {
+    border-radius: 3px 3px 0px 0px;
+}
+#login-form input[type="password"] {
+    border-top: none;
+    border-radius: 0px 0px 3px 3px;
+}
+#login-form footer {
+    font-size: 12px;
+    margin-top: 16px;
+}
+#login-form .info {
+    background: #e5e5e5;
+    border-radius: 50%;
+    display: inline-block;
+    height: 20px;
+    line-height: 20px;
+    margin: 0 10px 0 0;
+    text-align: center;
+    width: 20px;
+}
+#login-form .vladmaxi-top{
+    line-height: 24px;
+    font-size: 11px;
+    background: rgba(0, 0, 0, 0.08);
+    text-transform: uppercase;
+    z-index: 9999;
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    box-shadow: 1px 0px 2px rgba(0,0,0,0.2);
+    -webkit-animation: slideOut 0.5s ease-in-out 0.3s backwards;
+}
+#login-form @-webkit-keyframes slideOut{
+                0%{top:-30px; opacity: 0;}
+                100%{top:0px; opacity: 1;}
+            }
+#login-form .vladmaxi-top a{
+    padding: 0px 10px;
+    letter-spacing: 1px;
+    color: #333;
+    text-shadow: 0px 1px 1px #fff;
+    display: block;
+    float: left;
+}
+#login-form .vladmaxi-top a:hover{
+    background: #fff;
+}
+#login-form .vladmaxi-top span.right{
+    float: right;
+}
+#login-form .vladmaxi-top span.right a{
+    float: left;
+    display: block;
+}

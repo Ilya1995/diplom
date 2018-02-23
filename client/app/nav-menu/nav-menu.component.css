@@ -1,0 +1,224 @@
+@charset "utf-8";
+@import url(http://weloveiconfonts.com/api/?family=fontawesome);
+
+.btn-medium {
+    width: 40%;
+}
+.btn-small {
+    font-size: 10px;
+    padding: 5px;
+    width: 35%;
+}
+.btn-indent {
+    margin-top: 10px;
+    padding: 12px 20px;
+}
+.btn-l {
+    float: left;
+}
+.btn-r {
+    float: right;
+}
+.re-captcha {
+    margin: 20px 1px 1px 70px;
+}
+
+.text-label {
+    padding-top: 10px;
+}
+.scrol-table{
+    height:230px;
+    width:490px;
+    overflow: scroll;
+}
+a {
+    cursor: pointer;
+}
+
+/*****************************Выпадающее меню*******************************/
+
+/* main menu styles */
+#container .nav, .nav ul {
+    font-family:verdana;
+    list-style:none;
+    margin:0;
+    padding:0;
+    position:relative;
+}
+#container .nav {
+    height:50px;
+    left:0;
+    overflow:hidden;
+    top:0;
+}
+#container .nav li {
+    float:left;
+    position:relative;
+    z-index:10;
+}
+#container .nav li a {
+    color:#fff;
+    display:block;
+    float:left;
+    font-size:14px;
+    height:45px;
+    line-height:40px;
+    padding:0 10px;
+    position:relative;
+    text-decoration:none;
+    z-index:20;
+}
+#container .nav li:first-child a {
+    padding-left:15px;
+}
+#container .nav li ul li:first-child a {
+    background-image:none;
+    padding-left:10px;
+}
+#container .nav li.pad {
+
+    display:block;
+    height:51px;
+    width:35px;
+}
+#container .nav ul {
+    background:rgba(0, 0, 0, 0.5);
+    height:auto;
+    padding:10px 0;
+    position:absolute;
+    top:-115px;
+    width:150px;
+    z-index:1;
+
+    border-radius:8px; /*some css3*/
+    -moz-border-radius:8px;
+    -webkit-border-radius:8px;
+    transition:0.8s ease-in-out;
+    box-shadow:2px 2px 3px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow:2px 2px 3px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow:2px 2px 3px rgba(0, 0, 0, 0.5);
+    -moz-transition:0.8s ease-in-out;
+    -o-transition:0.8s ease-in-out;
+    -webkit-transition:all 0.8s ease-in-out;
+}
+#container .nav ul li {
+    width:180px;
+}
+#container .nav ul li a {
+    background:transparent;
+    height:20px;
+    line-height:20px;
+    width:160px;
+}
+#container .nav:hover {
+    height:110px;
+}
+#container .nav li:hover ul {
+    -o-transform:translate(0,161px);
+    -webkit-transform:translate(0,161px);
+}
+
+#container .nav #lk {
+    line-height:15px;
+    width:80px;
+    height: 190px;
+}
+
+
+/**********************Горизонтальное меню**************************/
+#container .nav {
+    height: 48px;
+    display: inline-block;
+    float: left;
+}
+#container .nav-right {
+    float: right;
+}
+#container .NavLink { cursor: pointer; }
+#container .NavLink {
+    background-color: #363b41;
+}
+#container .nav > li, .nav:active > .active {
+    float: left;
+    position: relative;
+    margin: 0 0 4px;
+    height: 44px;
+    color: #ccc;
+    text-shadow: 0 1px rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.9);
+    border-bottom-color: #1f2326;
+    background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0));
+    background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0));
+    background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0));
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0));
+    -webkit-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05), 0 2px #262a2e, 0 3px #1f2326, 0 4px 3px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05), 0 2px #262a2e, 0 3px #1f2326, 0 4px 3px rgba(0, 0, 0, 0.2);
+}
+#container .nav > li:hover,
+#container .nav ul .NavLink:hover{
+    color: #1dabb8;
+    text-shadow: 0 1px black, 0 0 20px rgba(255, 255, 255, 0.5);
+}
+#container .nav > li:first-child {
+    border-left-width: 1px !important;
+    border-left-color: #212425;
+    border-radius: 5px 0 0 5px;
+}
+#container .nav > li:last-child {
+    border-right-width: 1px !important;
+    border-right-color: #212425;
+    border-radius: 0 5px 5px 0;
+}
+#container .nav > li + li, .nav:active > .active + li, .nav:active > li + .active {
+    border-left-width: 0;
+}
+#container .nav > li > a {
+    display: block;
+    line-height: 44px;
+    padding: 0 20px;
+    font-size: 12px;
+    font-weight: bold;
+    color: inherit;
+    text-decoration: none;
+    outline: 0;
+}
+#container .nav .nav-icon {
+    padding: 0 15px;
+}
+#container [class*="icon-"] {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    vertical-align: text-top;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    font: 0/0 serif;
+    text-shadow: none;
+    color: transparent;
+}
+#container .icon-home {
+    background-position: 0 0;
+    background-image: url("./app/nav-menu/images/icons.png");
+}
+
+#container .icon-exit {
+    background-position: 0 0;
+    background-image: url("./app/nav-menu/images/exit.png");
+}
+
+#container #nameClient {
+    font-family: 'FontAwesome', sans-serif;
+    font-size: 16px;
+}
+
+#container .nav-right > li:hover{
+    color: #ccc;
+}
+#container #balance:hover{
+    color: #1dabb8;
+}
+
+#container #balance {
+    font-size: 11px;
+}
