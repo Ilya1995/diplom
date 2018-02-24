@@ -1,11 +1,11 @@
 <div class='form-group'>
-    <form id='login-form'>
+    <form id='login-form' (keyup.enter)="entry(login.value, password.value)">
         <h1>Авторизация на сайте</h1>
         <fieldset>
             <span class='span fontawesome-user'> </span>
-            <input type='text' placeholder='login'/>
+            <input type='text' placeholder='login' #login/>
             <span class='span fontawesome-lock'> </span>
-            <input class='inp-pass' type='password' placeholder='password'/>
+            <input class='inp-pass' type='password' placeholder='password' #password/>
 
             <footer class='clearfix'>
                 <p>
@@ -14,7 +14,7 @@
                 </p>
             </footer>
             <a class='btn-reg btn-blue btn-l btn-indent' type='submit'>Регистрация</a>
-            <a class='btn-blue btn-r btn-indent' type='submit'>Войти</a>
+            <a class='btn-blue btn-r btn-indent' (click)="entry(login.value, password.value)" type='submit'>Войти</a>
         </fieldset>
     </form>
 </div>

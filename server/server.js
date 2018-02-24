@@ -1,4 +1,3 @@
-const http = require('http');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -28,4 +27,4 @@ app.listen(app.get('port'), app.get('host'), function (err) {
     }
 });
 
-app.get(apiPrefix + '/phrases', handler.phrases);
+app.post(apiPrefix + '/authentication', handler.auth);

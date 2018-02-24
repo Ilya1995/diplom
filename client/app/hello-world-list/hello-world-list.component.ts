@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Phrase } from "./phrase";
-import { PhraseService } from "../shared/app.service";
+import { AppService } from "../shared/app.service";
 
 @Component({
     moduleId: module.id,
@@ -11,12 +11,12 @@ import { PhraseService } from "../shared/app.service";
 export class HelloWorldListComponent implements OnInit{
     phraseList: Phrase[];
 
-    constructor(private phrase: PhraseService) {
+    constructor(private phrase: AppService) {
         this.phraseList = [];
     }
 
     ngOnInit() {
-        this.phrase.getPhrase().subscribe(phraseList => this.phraseList = phraseList);
+        //this.phrase.getPhrase().subscribe(phraseList => this.phraseList = phraseList);
     }
 
     selectedPhraseLanguage: string;

@@ -2,12 +2,11 @@ import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 import { HttpModule } from "@angular/http";
-//import { Routes, RouterModule } from "@angular/router";
 
 import { AppComponent } from "./app.component";
-import { HelloWorldListComponent, List1Component, DownloadFileComponent, NavMenuComponent, AuntFormComponent,
+import { HelloWorldListComponent, List1Component, NavMenuComponent, AuntFormComponent,
     routing } from "./index";
-import { PhraseService } from "../app/shared/app.service";
+import { AppService } from "../app/shared/app.service";
 
 @NgModule({
     imports: [
@@ -15,9 +14,8 @@ import { PhraseService } from "../app/shared/app.service";
         FormsModule,
         HttpModule,
         routing],
-    declarations: [AppComponent,HelloWorldListComponent,List1Component,DownloadFileComponent,NavMenuComponent,
-        AuntFormComponent],
-    providers: [PhraseService],
+    declarations: [AppComponent,HelloWorldListComponent,List1Component,NavMenuComponent,AuntFormComponent],
+    providers: [AppService],
     bootstrap: [AppComponent]
 })
 export class AppModule {

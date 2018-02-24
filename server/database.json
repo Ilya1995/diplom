@@ -1,18 +1,18 @@
 {
   "dev": {
-    "driver": "mysql",
+    "driver": "postgresql",
     "host": "127.0.0.1",
-    "user": "root",
-    "database": "myDatabase",
+    "user": "postgres",
+    "database": "postgres",
     "password": "7991",
     "insecureAuth": true,
     "multipleStatements": true
   },
   "prod": {
-    "driver": "mysql",
+    "driver": "postgresql",
     "host": "127.0.0.1",
-    "user": "root",
-    "database": "myDatabase",
+    "user": "postgres",
+    "database": "postgres",
     "password": "7991",
     "insecureAuth": true,
     "multipleStatements": true
