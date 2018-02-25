@@ -28,3 +28,5 @@ app.listen(app.get('port'), app.get('host'), function (err) {
 });
 
 app.post(apiPrefix + '/authentication', handler.auth);
+app.get(apiPrefix + '/getLoggedUser', handler.getLoggedUser);
+app.get(apiPrefix + '/logout', handler.logout);
