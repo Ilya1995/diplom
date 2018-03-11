@@ -1,0 +1,115 @@
+@charset "utf-8";
+@import url(http://weloveiconfonts.com/api/?family=fontawesome);
+
+body {
+    background: url(./images/bg.png) repeat;
+}
+
+.btn-medium {
+    width: 40%;
+}
+.btn-small {
+    font-size: 10px;
+    padding: 5px;
+    width: 35%;
+}
+.btn-indent {
+    padding: 12px 20px;
+}
+.btn-l {
+    float: left;
+}
+.btn-r {
+    float: right;
+}
+.re-captcha {
+    margin: 20px 1px 1px 70px;
+}
+
+.text-label {
+    padding-top: 10px;
+}
+.scrol-table{
+    height:230px;
+    width:490px;
+    overflow: scroll;
+}
+a {
+    cursor: pointer;
+}
+
+/****************************Голубая кнопка********************************/
+.footer .btn-blue,
+#login-form .btn-blue {
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration:none;
+    color:#fff;
+    font-size: 14px;
+    position:relative;
+    text-align: center;
+    border-left:solid 1px #198d98;
+    /*margin-left:35px;*/
+    background: #1dabb8;
+    -webkit-border-top-right-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0px 1px 0px #2ab7ec, 0px 5px 0px 0px #156785, 0px 10px 5px #999;
+    -moz-box-shadow: inset 0px 1px 0px #2ab7ec, 0px 5px 0px 0px #156785, 0px 10px 5px #999;
+    -o-box-shadow: inset 0px 1px 0px #2ab7ec, 0px 5px 0px 0px #156785, 0px 10px 5px #999;
+    box-shadow: inset 0px 1px 0px #2ab7ec, 0px 5px 0px 0px #156785, 0px 10px 5px #999;
+}
+.footer .btn-blue:hover,
+#login-form .btn-blue:hover{
+    background: #198d98;
+}
+.footer .btn-blue:active,
+#login-form .btn-blue:active {
+    top:3px;
+    background: #198d98;
+    -webkit-box-shadow: inset 0px 1px 0px #2ab7ec, 0px 2px 0px 0px #156785, 0px 5px 3px #999;
+    -moz-box-shadow: inset 0px 1px 0px #2ab7ec, 0px 2px 0px 0px #156785, 0px 5px 3px #999;
+    -o-box-shadow: inset 0px 1px 0px #2ab7ec, 0px 2px 0px 0px #156785, 0px 5px 3px #999;
+    box-shadow: inset 0px 1px 0px #2ab7ec, 0px 2px 0px 0px #156785, 0px 5px 3px #999;
+}
+.footer .btn-blue:active::before,
+#login-form .btn-blue:active::before {
+    top:-3px;
+    -webkit-box-shadow:inset 0px 1px 0px #2ab7ec, 0px 5px 0px 0px #032b3a, 1px 1px 0px 0px #044a64, 2px 2px 0px 0px #044a64, 2px 5px 0px 0px #044a64, 6px 4px 2px #0b698b, 0px 10px 5px #999 ;
+    -moz-box-shadow:inset 0px 1px 0px #2ab7ec, 0px 5px 0px 0px #032b3a, 1px 1px 0px 0px #044a64, 2px 2px 0px 0px #044a64, 2px 5px 0px 0px #044a64, 6px 4px 2px #0b698b, 0px 10px 5px #999 ;
+    -o-box-shadow:inset 0px 1px 0px #2ab7ec, 0px 5px 0px 0px #032b3a, 1px 1px 0px 0px #044a64, 2px 2px 0px 0px #044a64, 2px 5px 0px 0px #044a64, 6px 4px 2px #0b698b, 0px 10px 5px #999 ;
+    box-shadow:inset 0px 1px 0px #2ab7ec, 0px 5px 0px 0px #032b3a, 1px 1px 0px 0px #044a64, 2px 2px 0px 0px #044a64, 2px 5px 0px 0px #044a64, 6px 4px 2px #0b698b, 0px 10px 5px #999 ;
+}
+
+
+.modal-background {
+    position         : absolute;
+    display          : flex;
+    justify-content  : center;
+    align-items      : center;
+    z-index          : 9999;
+    left             : 0;
+    right            : 0;
+    top              : 0;
+    bottom           : 0;
+    background-color : rgba(0, 0, 0, 0.6);
+}
+
+.modal-background:hover {
+    background-color : rgba(0, 0, 0, 0.8);
+}
+
+.container {
+    position        : relative;
+    display         : flex;
+    flex-direction  : column;
+    justify-content : flex-start;
+    width           : 500px;
+    height          : 530px;
+    border-radius   : 5px;
+    border          : gray solid 1px;
+    background      : white;
+    color           : black;
+    margin-bottom   : 15px;
+    padding-bottom  : 10px;
+}

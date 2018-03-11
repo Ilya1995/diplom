@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
-import { AppService } from "../shared/app.service";
+import { UserService } from "../services/user.service";
 
 @Component({
     moduleId: module.id,
@@ -11,7 +11,8 @@ export class AuntFormComponent {
     @Input() user;
     @Output() isAunt = new EventEmitter();
 
-    constructor(private service: AppService) {}
+    constructor(private service: UserService) {}
+
 
     entry(login, password) {
         if (!login || !password) {
@@ -27,5 +28,17 @@ export class AuntFormComponent {
             }
         });
         console.log(login, password);
+    }
+
+    isModalDialogVisible: boolean = false;
+    showDialogReg() {
+        this.isModalDialogVisible = true;
+    }
+
+    closeModalReg(data) {
+        this.isModalDialogVisible = false;
+        if (data.result) {
+            this.service.registration(data.data);
+        }
     }
 }

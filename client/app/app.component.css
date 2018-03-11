@@ -12,6 +12,3 @@ nav a.active {
 input:focus.ng-invalid.ng-dirty {
     border: 1px solid red;
 }
-#body {
-    background: url(./app/nav-menu/images/bg.png) repeat;
-}

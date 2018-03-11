@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import {AppService} from "../shared/app.service";
+import { UserService } from "../services/user.service";
 
 @Component({
     moduleId: module.id,
@@ -10,7 +10,7 @@ import {AppService} from "../shared/app.service";
 export class NavMenuComponent implements OnInit{
     user = null;
 
-    constructor(private service: AppService) {}
+    constructor(private service: UserService) {}
 
     ngOnInit() {
         this.service.getLoggedUser((err, data) => {

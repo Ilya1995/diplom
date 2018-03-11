@@ -1,7 +1,16 @@
 "use strict";
 
 var authentication = require('./authentication');
+var registration = require('./registration');
 // var async = require('async');
+
+module.exports.regClient = function (req, res) {
+    console.log(req.body);
+    registration.regClient(req.body, function (err) {
+        if (err) return res.send({result: false, note: err});
+        return res.send({result: true, data: 'Новый пользватель зарегистрирован'});
+    });
+};
 
 module.exports.auth = function (req, res) {
     console.log(req.body);

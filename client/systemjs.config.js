@@ -19,7 +19,8 @@
             '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
             // other libraries
             'rxjs':                      'npm:rxjs',
-            'angular-in-memory-web-api': 'npm:angular-in-memory-web-api'
+            'angular-in-memory-web-api': 'npm:angular-in-memory-web-api',
+            'typescript.events': 'npm:typescript.events'
         },
         // Указываем как выполнять загрузку файлов, когда отсутствует имя файла или его расширение
         packages: {
@@ -29,11 +30,14 @@
             },
             rxjs: {
                 defaultExtension: 'js'
+            },
+            'angular-in-memory-web-api': {
+                main: './index.js',
+                defaultExtension: 'js'
+            },
+            'typescript.events': {
+                defaultExtension: 'js'
             }
-            // 'angular-in-memory-web-api': {
-            //     main: './index.js',
-            //     defaultExtension: 'js'
-            // }
         }
     });
 })(this);

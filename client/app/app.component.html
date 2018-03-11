@@ -1,15 +1,29 @@
-<div id="body" style="margin: -8px -8px 0 ">
-<!--<h2>Hello World list</h2>-->
-<nav-menu></nav-menu>
-
-<nav>
-    <a routerLink="/list1" routerLinkActive="active"> List 1 </a>
-    <a routerLink="/list2" routerLinkActive="active"> List 2 </a>
-</nav>
-
 <div>
-    <router-outlet></router-outlet>
-</div>
+
+    <!--<popup  #popup1>-->
+        <!--Add your custom html elements here-->
+    <!--</popup>-->
+
+<!--<h2>Hello World list</h2>-->
+    <!--<ng2-popup #popup></ng2-popup>-->
+
+
+
+<nav-menu></nav-menu>
+    <button (click)="ClickButton()" >ЖМИИИ и познаешь силу Попупа</button>
+    <popup></popup>
+    <notifications></notifications>
+    <button (click)="showToast('Информация', 'Удали свою страницу из ВК')" >ЖМИИИ и познаешь силу Уведомлений</button>
+    <!--<modal-dialog [header]="'хедер'" [description]="'бред'"></modal-dialog>-->
+
+<!--<nav>-->
+    <!--<a routerLink="/list1" routerLinkActive="active"> List 1 </a>-->
+    <!--<a routerLink="/list2" routerLinkActive="active"> List 2 </a>-->
+<!--</nav>-->
+
+<!--<div>-->
+    <!--<router-outlet></router-outlet>-->
+<!--</div>-->
 
 
 <!--<button (click)="b($event)" name="ilya">press</button>-->

@@ -1,4 +1,7 @@
-import { Component } from "@angular/core";
+import {Component} from "@angular/core";
+import { PopupService } from "./services/popup.service";
+import { NotificationService } from "./services/notification.service";
+import { NotificationModel } from "./notification/notification.model";
 
 @Component({
     moduleId: module.id,
@@ -7,14 +10,16 @@ import { Component } from "@angular/core";
     styleUrls: ["app.component.css"]
 })
 export class AppComponent {
-    a: boolean = true;
-    b (e) : void {
-        console.log(e);
+    constructor(private popupService: PopupService, private notificationService: NotificationService) {}
+
+
+    public showToast(header: string, description: string) {
+        this.notificationService.showToast(new NotificationModel(header, description));
     }
-    c = [
-        {name: 'ilya1', age: 25},
-        {name: 'ilya2', age: 25},
-        {name: 'ilya3', age: 25}
-    ];
-    d: string = '';
+
+    ClickButton(){
+        this.popupService.showPopup({header: 'Общая информация', description: 'Закрывай скорее, хватит смотреть'}, (result) => {
+            console.log(result);
+        });
+    }
 }

@@ -1,0 +1,18 @@
+<div *ngIf="isPopupVisible" id="ng2-opd-popup-main" class="container ng2-opd-popup-content-main popup">
+    <div class="row">
+        <div style="display: inline-block;width:100%">
+            <div class="title ng2-opd-popup-well ng2-opd-popup-well-sm" id="ng2-opd-popup-well" >
+                {{popup.header}}
+            </div>
+        </div>
+        <div style="margin:20px;">
+            {{popup.description}}
+        <br>
+            <div style="margin-bottom:20px;margin-top:20px;float: right">
+                <button id="cancelBtn" type="reset" class="btn btn-default" (click)="closeModal(false)">Cancle</button>
+                <button id="confirmBtn" class="btn btn-default" (click)="closeModal(true)">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+

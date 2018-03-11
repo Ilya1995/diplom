@@ -1,0 +1,35 @@
+<div class="modal-background">
+    <form id='login-form' (keyup.enter)="confirm(login.value, pass1.value, pass2.value, name.value, email.value)">
+        <div class="container">
+            <div class='alpha-inner'>
+                <h1 class='text-center page-header'>Регистрация</h1>
+            </div>
+            <div class='form-group'>
+                <label class='text-label'>Логин</label>
+                <input type='text' class='form-control' name="login" #login/>
+
+                <label class='text-label'>Пароль</label>
+                <input type='password' class='form-control' minlength="4" #pass1/>
+
+                <label class='text-label'>Повторите пароль</label>
+                <input type='password' class='form-control' #pass2/>
+
+                <label class='text-label'>Ваше имя</label>
+                <input type='text' class='form-control' #name/>
+
+                <label class='text-label'>E-mail</label>
+                <input class='form-control' #email/>
+            </div>
+            <div class='footer reg-form'>
+                <a class='btn-l btn-blue btn-indent btn-medium' (click)="close()">
+                    Отмена
+                </a>
+                <a class='btn-r btn-blue btn-indent btn-medium'
+                   (click)="confirm({login: login.value,pass1: pass1.value,
+                            pass2: pass2.value,name: name.value,email: email.value})">
+                    Подтвердить
+                </a>
+            </div>
+        </div>
+    </form>
+</div>
