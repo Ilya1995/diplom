@@ -20,28 +20,22 @@ module.exports.auth = function (req, res) {
             res.cookie('login', req.body.login);
             res.cookie('password', req.body.password);
         }
-        res.cookie('1', '1');
         return res.send({result: true, data: data});
     });
 };
 
 module.exports.getLoggedUser = function (req, res) {
     console.log(req.cookies);
-    return res.send({result: false, note: 'errrr'});
-    // authentication.getLoggedUser(req.cookies, function (err, data) {
-    //     console.log(err);
-    //     console.log(data);
-    //     if (err) {
-    //         return res.send({result: false, note: err});
-    //     }
-    //     if (data.result) {
-    //         res.send({result: true, data: data.data});
-    //     } else {
-    //         res.send({result: false, note: data.note});
-    //     }
-    //
-    //     //res.send({result: true, data: data});
-    // });
+    var data = {
+        login: req.cookies.login,
+        password: req.cookies.password
+    };
+    authentication.auth(data, function (err, data) {
+        console.log(err);
+        console.log(data);
+        if (err) return res.send({result: false, note: err});
+        return res.send({result: true, data: data});
+    });
 };
 
 module.exports.logout = function (req, res) {

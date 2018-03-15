@@ -7,7 +7,7 @@ export class UserService {
     constructor(private http: Http, private popupService: PopupService) {}
 
     registration(data) {
-        let url = 'http://localhost:3550/api/registration';
+        let url = '/api/registration';
         let headers = new Headers({'Content-Type': 'application/json'});
         let options = new RequestOptions({headers});
         this.http.post(url, data, options)
@@ -29,7 +29,7 @@ export class UserService {
     }
 
     authorization(data, callback) {
-        let url = 'http://localhost:3550/api/authentication';
+        let url = '/api/authentication';
         let headers = new Headers({'Content-Type': 'application/json'});
         let options = new RequestOptions({headers});
         this.http.post(url, data, options)
@@ -50,7 +50,7 @@ export class UserService {
     }
 
     getLoggedUser(callback) {
-        let url = 'http://localhost:3550/api/getLoggedUser';
+        let url = '/api/getLoggedUser';
         let headers = new Headers({'Content-Type': 'application/json'});
         let options = new RequestOptions({headers});
         this.http.get(url, options)
@@ -71,7 +71,7 @@ export class UserService {
     }
 
     logout(callback) {
-        let url = 'http://localhost:3550/api/logout';
+        let url = '/api/logout';
         let headers = new Headers({'Content-Type': 'application/json'});
         let options = new RequestOptions({headers});
         this.http.get(url, options)

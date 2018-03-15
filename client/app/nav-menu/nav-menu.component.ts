@@ -17,6 +17,7 @@ export class NavMenuComponent implements OnInit{
             if (err) {
                 console.error(err);
             } else {
+                this.user = data;
                 console.log(data);
             }
         });
