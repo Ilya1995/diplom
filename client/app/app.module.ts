@@ -7,7 +7,7 @@ import { NavMenuComponent, AuntFormComponent, RegistrationFormComponent,
     NotificationComponent, PopupComponent, routing } from "./index";
 import { UserService } from "./services/user.service";
 import { PopupService } from "./services/popup.service";
-import { NotificationService } from "./services/notification.service"
+import { NotificationService } from "./services/notification.service";
 
 @NgModule({
     imports: [

@@ -22,9 +22,14 @@
                 <ul *ngIf="user" class='nav nav-right'>
                     <li>
                         <a class='NavLink' id='NavLink-right'>
-                            <div id='lk'>
+                            <div id='lk' align="center">
                                 <strong id='nameClient'>{{user.name}}</strong>
-                                <p id='balance'>Баланс:{{user.balance || 0}}р</p>
+                                <div class="styled-select">
+                                    <select [(ngModel)]="selectedValue">
+                                        <option *ngFor="let c of countries" [ngValue]="c">{{c.name}}</option>
+                                    </select>
+                                </div>
+                                <!--<p id='balance'>Баланс:{{user.balance || 0}}р</p>-->
                             </div>
                         </a>
                     </li>

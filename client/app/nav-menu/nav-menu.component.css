@@ -31,7 +31,7 @@
     width:490px;
     overflow: scroll;
 }
-a {
+a, select {
     cursor: pointer;
 }
 
@@ -69,7 +69,7 @@ a {
     z-index:20;
 }
 #container .nav li:first-child a {
-    padding-left:15px;
+    padding-left:23px;
 }
 #container .nav li ul li:first-child a {
     background-image:none;
@@ -120,7 +120,7 @@ a {
 
 #container .nav #lk {
     line-height:15px;
-    width:80px;
+    width:100px;
     height: 190px;
     padding-top: 7px;
 }
@@ -222,4 +222,21 @@ a {
 
 #container #balance {
     font-size: 11px;
+}
+
+.styled-select {
+    margin-left: -20px;
+    width: 137px;
+    height: 23px;
+    overflow: hidden;
+    background: url(./app/nav-menu/images/back_arrow.png) no-repeat right #292828;
+    border-radius: 20px;
+}
+
+.styled-select select {
+    background: transparent;
+    width: 152px;
+    padding-left: 5px;
+    border: 1px solid transparent;
+    height: 27px;
 }

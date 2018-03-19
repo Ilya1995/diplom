@@ -9,6 +9,12 @@ import { UserService } from "../services/user.service";
 })
 export class NavMenuComponent implements OnInit{
     user = null;
+    countries = [
+        {name: 'Администратор'},
+        {name: 'Пользователь'},
+        {name: 'Разработчик'},
+    ];
+    selectedValue = this.countries[2];
 
     constructor(private service: UserService) {}
 
