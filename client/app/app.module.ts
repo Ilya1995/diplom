@@ -3,8 +3,8 @@ import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 import { HttpModule } from "@angular/http";
 import { AppComponent } from "./app.component";
-import { NavMenuComponent, AuntFormComponent, RegistrationFormComponent,
-    NotificationComponent, PopupComponent, routing } from "./index";
+import { NavMenuComponent, AuntFormComponent, RegistrationFormComponent, RoleFormComponent,
+    NotificationComponent, PopupComponent, ClientsTableComponent, routing } from "./index";
 import { UserService } from "./services/user.service";
 import { PopupService } from "./services/popup.service";
 import { NotificationService } from "./services/notification.service";
@@ -16,8 +16,8 @@ import { NotificationService } from "./services/notification.service";
         HttpModule],
         // routing],
     declarations: [
-        AppComponent, NavMenuComponent, AuntFormComponent,
-        RegistrationFormComponent, NotificationComponent, PopupComponent],
+        AppComponent, NavMenuComponent, AuntFormComponent, ClientsTableComponent,
+        RegistrationFormComponent, NotificationComponent, PopupComponent, RoleFormComponent],
     providers: [UserService, PopupService, NotificationService],
     bootstrap: [AppComponent]
 })

@@ -6,6 +6,48 @@ import {PopupService} from "./popup.service";
 export class UserService {
     constructor(private http: Http, private popupService: PopupService) {}
 
+    getRoles(callback) {
+        let url = '/api/getRoles';
+        let headers = new Headers({'Content-Type': 'application/json'});
+        let options = new RequestOptions({headers});
+        this.http.get(url, options)
+            .subscribe(
+                (result) => {
+                    let json = result.json();
+                    console.log(json);
+                    if (json.result) {
+                        return callback(null, json.data);
+                    }
+                    return callback(json.note);
+                },
+                (error) => {
+                    console.error(error);
+                    return callback(error);
+                }
+            )
+    }
+
+    getClients(data, callback) {
+        let url = '/api/getClients';
+        let headers = new Headers({'Content-Type': 'application/json'});
+        let options = new RequestOptions({headers});
+        this.http.post(url, data, options)
+            .subscribe(
+                (result) => {
+                    let json = result.json();
+                    console.log(json);
+                    if (json.result) {
+                        return callback(null, json.data);
+                    }
+                    return callback(json.note);
+                },
+                (error) => {
+                    console.error(error);
+                    return callback(error);
+                }
+            )
+    }
+
     registration(data) {
         let url = '/api/registration';
         let headers = new Headers({'Content-Type': 'application/json'});
@@ -22,7 +64,7 @@ export class UserService {
                     }
                 },
                 (error) => {
-                    this.popupService.showPopup({header: 'Регистрация', description: 'Ошибка регистрации'},()=>{});
+                    this.popupService.showPopup({header: 'Ошибка', description: 'Ошибка регистрации'},()=>{});
                     console.error(error);
                 }
             )
@@ -44,6 +86,7 @@ export class UserService {
                 },
                 (error) => {
                     console.error(error);
+                    this.popupService.showPopup({header: 'Ошибка', description: 'Ошибка авторизации'},()=>{});
                     return callback(error);
                 }
             )

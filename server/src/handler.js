@@ -1,8 +1,23 @@
 "use strict";
 
-var authentication = require('./authentication');
-var registration = require('./registration');
+const authentication = require('./authentication');
+const registration = require('./registration');
+const users = require('./users');
 // var async = require('async');
+
+module.exports.getRoles = function (req, res) {
+    users.getRoles(function (err, data) {
+        if (err) return res.send({result: false, note: err});
+        return res.send({result: true, data: data});
+    });
+};
+
+module.exports.getClients = function (req, res) {
+    users.getClients(req.body, function (err, data) {
+        if (err) return res.send({result: false, note: err});
+        return res.send({result: true, data: data});
+    });
+};
 
 module.exports.regClient = function (req, res) {
     console.log(req.body);
@@ -44,3 +59,4 @@ module.exports.logout = function (req, res) {
     console.log('Пользователь разлогинился');
     res.send({result: true});
 };
+

@@ -5,16 +5,14 @@
                 <ul class='nav'>
                     <li><a class='nav-icon NavLink' title='Главная'><span class='icon-home'>Главная</span></a></li>
                     <li><a class='NavLink'>Сообщения</a>
-                    <div>
-                        <ul>
-                            <li><a class='NavLink'>
-                                Новое
-                                </a></li>
-                            <li><a class='NavLink'>Отправленные</a></li>
-                        </ul>
-                    </div>
-                </li>
-                    <li><a class='NavLink'>Обучение</a></li>
+                        <div>
+                            <ul>
+                                <li><a class='NavLink'>Новое</a></li>
+                                <li><a class='NavLink'>Отправленные</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li><a class='NavLink' (click)="checkClients()">Клиенты</a></li>
                     <li><a class='NavLink'>О нас</a></li>
                     <li><a class='NavLink'>Контакты</a></li>
                 </ul>
@@ -33,11 +31,12 @@
                             </div>
                         </a>
                     </li>
-                    <li >
+                    <li>
                         <a class='nav-icon NavLink' (click)="logout()" title='Выход'><span class='icon-exit'>Выход</span></a>
                     </li>
                 </ul>
             </nav>
         </section>
     </div>
+    <clients-table *ngIf="visibleTableClients && user"></clients-table>
 </div>

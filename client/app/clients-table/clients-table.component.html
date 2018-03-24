@@ -1,0 +1,31 @@
+<div style="padding-top: 150px;">
+    <div style="border: 2px solid #292828; width: 95%; margin: auto; border-radius: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.5);">
+
+        <div style="float: right; margin: 30px">
+            <button type="button" (click)="getClients()" class="btn btn-small btn-primary">Поиск клиента</button>
+            <input type="text" (keyup.enter)="getClients()" [(ngModel)]="seachClient" placeholder = "Введите имя клиента..." style="padding: 4px; margin-left: -5px">
+        </div>
+
+        <table class="table table-bordered table-hover sales_team-table scrolling-table" style="border: 2px solid #292828;">
+            <thead>
+                <tr align="center">
+                    <th width="300px">Имя</th>
+                    <th width="200px">Баланс(рубли)</th>
+                    <th width="300px">Дата регистрации</th>
+                    <th width="300px">Действия</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let client of clients">
+                    <td width="270px" class='clickable'>{{client.name}}</td>
+                    <td width="200px" class='clickable'>{{client.balance || 0}}</td>
+                    <td width="300px">{{client.date}}</td>
+                    <td width="300px"><button (click)="updateRole(client)">Изменить</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<role-form *ngIf="updateRoleVisible"></role-form>

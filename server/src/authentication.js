@@ -5,13 +5,12 @@ var config = require('../config/mainConfig').config;
 
 module.exports.auth = function (params, callback) {
     console.log(params);
-    if (!params.login) return callback('Введите логин');
-    if (!params.password) return callback('Введите пароль');
+    if (!params.login || !params.password) return callback('Введите логин и пароль');
 
     const client = new pg.Client(config.database.postgresql);
     client.connect();
 
-    var select = "select name, balance from clients where login=$1 and password=$2;";
+    var select = "select id, name, balance from clients where login=$1 and password=$2;";
 
     client.query(select, [params.login, params.password], function(err, res) {
         client.end();

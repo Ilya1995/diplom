@@ -11,10 +11,12 @@ export class NavMenuComponent implements OnInit{
     user = null;
     countries = [
         {name: 'Администратор'},
-        {name: 'Пользователь'},
-        {name: 'Разработчик'},
+        {name: 'Пациент'},
+        {name: 'Доктор'},
     ];
     selectedValue = this.countries[2];
+
+    visibleTableClients = false;
 
     constructor(private service: UserService) {}
 
@@ -27,6 +29,10 @@ export class NavMenuComponent implements OnInit{
                 console.log(data);
             }
         });
+    }
+
+    checkClients() {
+        this.visibleTableClients = true;
     }
 
     isAunt(data) {
