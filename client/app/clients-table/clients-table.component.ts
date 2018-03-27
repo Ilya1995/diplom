@@ -1,5 +1,6 @@
 import {Component} from "@angular/core";
 import {UserService} from "../services/user.service";
+import {Router} from "@angular/router";
 
 @Component({
     moduleId: module.id,
@@ -8,16 +9,14 @@ import {UserService} from "../services/user.service";
     styleUrls: ["clients-table.component.css"]
 })
 export class ClientsTableComponent {
-    constructor(private service: UserService) {}
-
-    updateRoleVisible = false;
+    constructor(private router: Router, private service: UserService) {}
 
     clients = [];
     seachClient = '';
 
-    updateRole(client) {
-        console.log(client);
-        this.updateRoleVisible = true;
+    selectClient(id) {
+        console.log(id);
+        this.router.navigate(['client', id]);
     }
 
     getClients() {

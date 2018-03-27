@@ -1,33 +1,9 @@
-// CREATE TABLE IF NOT EXISTS clients (
-//     id SERIAL PRIMARY KEY,
-//     balance INT NULL,
-//     name VARCHAR(128) NOT NULL,
-//     email VARCHAR(128) NOT NULL,
-//     login VARCHAR(64) NOT NULL,
-//     password VARCHAR(64) NOT NULL);
-//
-//
-// INSERT INTO clients (balance,name,email,login,password)
-// VALUES (1000, 'test1', '', 'test1', 'test1');
-
 var async = require('async');
 
 exports.up = function(db, callback) {
-    async.series([
+    async.waterfall([
         function (callback) {
-            var sql = "CREATE TABLE IF NOT EXISTS roles ( " +
-                "id SERIAL PRIMARY KEY, name VARCHAR(128) NOT NULL)";
-            db.runSql(sql, function (err) {
-                if (err) {
-                    console.error('error1');
-                    return callback(err);
-                }
-                console.log('ok1');
-                return callback(null);
-            });
-        },
-        function (callback) {
-            var sql = "INSERT INTO roles (name) VALUES ('Администратор');";
+            var sql = "ALTER TABLE clients DROP COLUMN balance;";
             db.runSql(sql, function (err) {
                 if (err) {
                     return callback(err);
@@ -36,7 +12,7 @@ exports.up = function(db, callback) {
             });
         },
         function (callback) {
-            var sql = "INSERT INTO roles (name) VALUES ('Пациент');";
+            var sql = "ALTER TABLE clients DROP COLUMN login;";
             db.runSql(sql, function (err) {
                 if (err) {
                     return callback(err);
@@ -45,7 +21,25 @@ exports.up = function(db, callback) {
             });
         },
         function (callback) {
-            var sql = "INSERT INTO roles (name) VALUES ('Доктор');";
+            var sql = "ALTER TABLE clients ADD COLUMN phone VARCHAR(128) NOT NULL;";
+            db.runSql(sql, function (err) {
+                if (err) {
+                    return callback(err);
+                }
+                return callback(null);
+            });
+        },
+        function (callback) {
+            var sql = "ALTER TABLE clients ADD COLUMN serial INT NOT NULL;";
+            db.runSql(sql, function (err) {
+                if (err) {
+                    return callback(err);
+                }
+                return callback(null);
+            });
+        },
+        function (callback) {
+            var sql = "ALTER TABLE clients ADD COLUMN number INT NOT NULL;";
             db.runSql(sql, function (err) {
                 if (err) {
                     return callback(err);

@@ -6,8 +6,8 @@ import {PopupService} from "./popup.service";
 export class UserService {
     constructor(private http: Http, private popupService: PopupService) {}
 
-    getRoles(callback) {
-        let url = '/api/getRoles';
+    getClient(data, callback) {
+        let url = '/api/getClient/' + data.id;
         let headers = new Headers({'Content-Type': 'application/json'});
         let options = new RequestOptions({headers});
         this.http.get(url, options)

@@ -3,7 +3,7 @@
         <section id='container'>
             <nav>
                 <ul class='nav'>
-                    <li><a class='nav-icon NavLink' title='Главная'><span class='icon-home'>Главная</span></a></li>
+                    <li><a class='nav-icon NavLink' (click)="home()" title='Главная'><span class='icon-home'>Главная</span></a></li>
                     <li><a class='NavLink'>Сообщения</a>
                         <div>
                             <ul>
@@ -12,7 +12,7 @@
                             </ul>
                         </div>
                     </li>
-                    <li><a class='NavLink' (click)="checkClients()">Клиенты</a></li>
+                    <li><a class='NavLink' routerLink="/clients" routerLinkActive="active">Клиенты</a></li>
                     <li><a class='NavLink'>О нас</a></li>
                     <li><a class='NavLink'>Контакты</a></li>
                 </ul>
@@ -38,5 +38,4 @@
             </nav>
         </section>
     </div>
-    <clients-table *ngIf="visibleTableClients && user"></clients-table>
 </div>

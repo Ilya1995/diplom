@@ -1,0 +1,26 @@
+<div style="padding-top: 150px; padding-bottom: 50px">
+    <div style="border: 2px solid #292828; width: 95%; margin: auto; border-radius: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.5);">
+        <form style="margin: auto; margin-bottom: 40px; margin-top: 40px;" (keyup.enter)="save()">
+            <h3 style="text-align: center">Информация о клиенте</h3>
+            <div style="margin-left:20%; margin-right:20%">
+                <label style="padding-top: 20px" class='text-label'>ФИО</label>
+                <input readonly type='text' class='form-control' [(value)]="client.name">
+                <label style="padding-top: 20px" class='text-label'>Номер телефона</label>
+                <input readonly type='text' class='form-control' [(value)]="client.phone">
+                <label style="padding-top: 20px" class='text-label'>Электронный адрес</label>
+                <input readonly type='text' class='form-control' [(value)]="client.email">
+                <label style="padding-top: 20px" class='text-label'>Дата регистрации</label>
+                <input readonly type='text' class='form-control' [(value)]="client.date">
+                <label style="padding-top: 20px" class='text-label'>Серия паспорта</label>
+                <input readonly type='text' class='form-control' [(value)]="client.serial">
+                <label style="padding-top: 20px" class='text-label'>Номер паспорта</label>
+                <input readonly type='text' class='form-control' [(value)]="client.number">
+                <div style="margin-top: 20px">
+                    <button>Записи пациента</button>
+                    <button (click)="addRole()">Добавить роль</button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>

@@ -6,26 +6,26 @@ var moment = require('moment');
 
 /**
  * Регистрация нового клиента
- * @param params.login - логин
- * @param params.pass1 - пароль
- * @param params.pass2 - пароль
- * @param params.name - имя
+ * @param params.phone - номер телефона
+ * @param params.pass - пароль
+ * @param params.name - ФИО
  * @param params.email - емэйл
+ * @param params.serial - серия паспорта
+ * @param params.number - номер паспорта
  * @param callback
  */
 module.exports.regClient = function (params, callback) {
     const client = new pg.Client(config.database.postgresql);
     client.connect();
 
-    if ((!params.login || !params.pass1)) return callback('Не указаны логин или пароль');
-    if (params.pass1 !== params.pass2) return callback('Указанные пароли не совпадают');
+    if ((!params.phone || !params.pass)) return callback('Не указаны логин или пароль');
 
     async.waterfall([
         function (callback) {
-            var sql = "SELECT id FROM clients WHERE login = $1";
-            client.query(sql, [params.login], function (err, res) {
+            var sql = "SELECT id FROM clients WHERE phone = $1";
+            client.query(sql, [params.phone], function (err, res) {
                 if (res.rows.length) {
-                    return callback('Пользователь с таким логином уже зарегистрирован');
+                    return callback('Пользователь с таким номером телефона уже зарегистрирован');
                 }
                 if (err) {
                     console.error(err.message);
@@ -35,8 +35,9 @@ module.exports.regClient = function (params, callback) {
             });
         },
         function (callback) {
-            var sql = "INSERT INTO clients (balance, name, email, login, password, date_reg) values(null, $1, $2, $3, $4, $5) RETURNING id";
-            client.query(sql, [params.name, params.email, params.login, params.pass1, moment().format('DD-MM-Y H:mm:ss')], function (err, req) {
+            var sql = "INSERT INTO clients (name, email, password, date_reg, phone, serial, number) values($1, $2, $3, $4, $5, $6, $7) RETURNING id";
+            client.query(sql, [params.name, params.email, params.pass, moment().format('DD-MM-Y H:mm:ss'),
+                params.phone, params.serial, params.number], function (err, req) {
                 if (err) {
                     console.error(err.message);
                     return callback('Ошибка добавления нового клиента в бд');

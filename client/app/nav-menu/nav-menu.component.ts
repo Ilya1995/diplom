@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { UserService } from "../services/user.service";
+import {Router} from "@angular/router";
 
 @Component({
     moduleId: module.id,
@@ -9,16 +10,10 @@ import { UserService } from "../services/user.service";
 })
 export class NavMenuComponent implements OnInit{
     user = null;
-    countries = [
-        {name: 'Администратор'},
-        {name: 'Пациент'},
-        {name: 'Доктор'},
-    ];
-    selectedValue = this.countries[2];
+    countries = [];
+    selectedValue = 'Пациент';
 
-    visibleTableClients = false;
-
-    constructor(private service: UserService) {}
+    constructor(private router: Router, private service: UserService) {}
 
     ngOnInit() {
         this.service.getLoggedUser((err, data) => {
@@ -26,27 +21,32 @@ export class NavMenuComponent implements OnInit{
                 console.error(err);
             } else {
                 this.user = data;
+                this.countries = data.roles;
+                this.selectedValue = this.countries[0];
                 console.log(data);
             }
         });
     }
 
-    checkClients() {
-        this.visibleTableClients = true;
-    }
-
     isAunt(data) {
         this.user = data;
+        this.countries = data.roles;
+        this.selectedValue = this.countries[0];
         console.log(data);
     }
 
     logout() {
         this.service.logout((err) => {
+            this.home();
             if (err) {
                 console.error(err);
             } else {
                 this.user = null;
             }
         });
+    }
+
+    home() {
+        this.router.navigate(['home']);
     }
 }

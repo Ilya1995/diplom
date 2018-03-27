@@ -3,29 +3,26 @@
 
         <div style="float: right; margin: 30px">
             <button type="button" (click)="getClients()" class="btn btn-small btn-primary">Поиск клиента</button>
-            <input type="text" (keyup.enter)="getClients()" [(ngModel)]="seachClient" placeholder = "Введите имя клиента..." style="padding: 4px; margin-left: -5px">
+            <input type="text" (keyup.enter)="getClients()" [(ngModel)]="seachClient" placeholder = "Введите имя..." style="padding: 4px; margin-left: -5px">
         </div>
 
         <table class="table table-bordered table-hover sales_team-table scrolling-table" style="border: 2px solid #292828;">
             <thead>
-                <tr align="center">
-                    <th width="300px">Имя</th>
-                    <th width="200px">Баланс(рубли)</th>
-                    <th width="300px">Дата регистрации</th>
-                    <th width="300px">Действия</th>
+                <tr>
+                    <th width="400px">Имя</th>
+                    <th width="400px">Номер телефона</th>
+                    <th width="400px">Дата регистрации</th>
                 </tr>
             </thead>
 
             <tbody>
-                <tr *ngFor="let client of clients">
-                    <td width="270px" class='clickable'>{{client.name}}</td>
-                    <td width="200px" class='clickable'>{{client.balance || 0}}</td>
-                    <td width="300px">{{client.date}}</td>
-                    <td width="300px"><button (click)="updateRole(client)">Изменить</button></td>
+                <tr *ngFor="let client of clients" (click)="selectClient(client.id)">
+                    <td width="370px" class='clickable'>{{client.name}}</td>
+                    <td width="400px" class='clickable'>{{client.phone}}</td>
+                    <td width="400px">{{client.date}}</td>
+                    <!--<button (click)="updateRole(client)">Изменить</button>-->
                 </tr>
             </tbody>
         </table>
     </div>
-
 </div>
-<role-form *ngIf="updateRoleVisible"></role-form>

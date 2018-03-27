@@ -6,6 +6,7 @@
 
 .table-bordered > thead > tr > th{
     border-bottom: 1px solid;
+    text-align: center;
 }
 
 

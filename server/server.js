@@ -32,4 +32,4 @@ app.post(apiPrefix + '/authentication', handler.auth);
 app.get(apiPrefix + '/getLoggedUser', handler.getLoggedUser);
 app.get(apiPrefix + '/logout', handler.logout);
 app.post(apiPrefix + '/getClients', handler.getClients);
-app.get(apiPrefix + '/getRoles', handler.getRoles);
+app.get(apiPrefix + '/getClient/:id', handler.getClient);

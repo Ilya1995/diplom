@@ -5,8 +5,8 @@ const registration = require('./registration');
 const users = require('./users');
 // var async = require('async');
 
-module.exports.getRoles = function (req, res) {
-    users.getRoles(function (err, data) {
+module.exports.getClient = function (req, res) {
+    users.getClient(req.params, function (err, data) {
         if (err) return res.send({result: false, note: err});
         return res.send({result: true, data: data});
     });

@@ -1,20 +1,10 @@
 <div>
-
-    <!--<popup  #popup1>-->
-        <!--Add your custom html elements here-->
-    <!--</popup>-->
-
-<!--<h2>Hello World list</h2>-->
-    <!--<ng2-popup #popup></ng2-popup>-->
-
-
-
-<nav-menu></nav-menu>
-    <button (click)="ClickButton()" >ЖМИИИ и познаешь силу Попупа</button>
+    <nav-menu></nav-menu>
+    <router-outlet></router-outlet>
+    <!--<button (click)="ClickButton()" >ЖМИИИ и познаешь силу Попупа</button>-->
     <popup></popup>
     <notifications></notifications>
-    <button (click)="showToast('Информация', 'Удали свою страницу из ВК')" >ЖМИИИ и познаешь силу Уведомлений</button>
-    <!--<modal-dialog [header]="'хедер'" [description]="'бред'"></modal-dialog>-->
+    <!--<button (click)="showToast('Информация', 'Удали свою страницу из ВК')" >ЖМИИИ и познаешь силу Уведомлений</button>-->
 
 <!--<nav>-->
     <!--<a routerLink="/list1" routerLinkActive="active"> List 1 </a>-->
@@ -25,24 +15,4 @@
     <!--<router-outlet></router-outlet>-->
 <!--</div>-->
 
-
-<!--<button (click)="b($event)" name="ilya">press</button>-->
-<!--&lt;!&ndash;<div>&ndash;&gt;-->
-    <!--&lt;!&ndash;{{ a ? b() : ''}}&ndash;&gt;-->
-<!--&lt;!&ndash;</div>&ndash;&gt;-->
-
-<!--<input [readonly]="a" type="text" [(ngModel)]="d"/>-->
-<!--{{d}}-->
-
-<!--<div *ngIf="a" [class.class1]="a">-->
-    <!--<div *ngFor="let c1 of c" [ngClass]="{ 'class1': a}">-->
-        <!--{{c1.name}}-->
-    <!--</div>-->
-<!--</div>-->
-
-<!--<form (ngSubmit)="b(); todoForm.reset()" #todoForm="ngForm">-->
-    <!--<input type="text" name="title" [(ngModel)]="d" required/>-->
-    <!--<button type="submit" [disabled]="todoForm.form.invalid">Добавить</button>-->
-<!--</form>-->
-<!--<list-1 [list]="56454" (b)="b($event)"></list-1>-->
 </div>
