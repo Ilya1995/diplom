@@ -1,0 +1,28 @@
+
+.table-bordered > tbody > tr > th,
+.table-bordered > tbody > tr > td{
+    border: 1px solid;
+}
+
+.table-bordered > thead > tr > th{
+    border-bottom: 1px solid;
+    text-align: center;
+}
+
+
+table {
+    background-color: #ddd;
+    width: 70%;
+    margin: auto;
+    margin-bottom: 40px;
+}
+
+.scrolling-table tbody {
+    display: block;
+    height: 300px;
+    overflow: hidden;
+    overflow-y: auto;
+}
+.scrolling-table thead {
+    display: block;
+}

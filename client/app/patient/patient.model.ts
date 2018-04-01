@@ -1,6 +1,5 @@
-import {RoleModel} from "../shared/RoleModel";
 
-export class ClientModel {
+export class PatientModel {
     public id: number;
     public date_reg: string;
     public email: string;
@@ -8,10 +7,10 @@ export class ClientModel {
     public number: number;
     public serial: number;
     public phone: string;
-    public roles: RoleModel[];
+    public roleName: string;
 
     constructor(id: number, date_reg: string, name: string, number: number, serial: number, phone: string,
-                roles: RoleModel[], email?: string) {
+                roleName: string, email?: string) {
         this.id = id;
         this.date_reg = date_reg;
         this.email = email || '';
@@ -19,6 +18,6 @@ export class ClientModel {
         this.number = number;
         this.serial = serial;
         this.phone = phone;
-        this.roles = roles;
+        this.roleName = roleName;
     }
 }

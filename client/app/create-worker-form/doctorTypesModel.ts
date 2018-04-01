@@ -1,4 +1,5 @@
-export class RoleModel {
+
+export class DoctorTypesModel {
     public id: number;
     public name: string;
 

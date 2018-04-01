@@ -31,9 +31,6 @@
     width:490px;
     overflow: scroll;
 }
-a, select {
-    cursor: pointer;
-}
 
 /*****************************Выпадающее меню*******************************/
 
@@ -225,17 +222,10 @@ a, select {
 
 .styled-select {
     margin-left: -20px;
+    padding-top: 4px;
     width: 137px;
     height: 23px;
     overflow: hidden;
-    background: url(./app/nav-menu/images/back_arrow.png) no-repeat right #292828;
+    background: right #292828;
     border-radius: 20px;
-}
-
-.styled-select select {
-    background: transparent;
-    width: 152px;
-    padding-left: 5px;
-    border: 1px solid transparent;
-    height: 27px;
 }

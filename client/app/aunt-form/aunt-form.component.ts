@@ -29,16 +29,4 @@ export class AuntFormComponent {
         });
         console.log(login, password);
     }
-
-    isModalDialogVisible: boolean = false;
-    showDialogReg() {
-        this.isModalDialogVisible = true;
-    }
-
-    closeModalReg(data) {
-        this.isModalDialogVisible = false;
-        if (data.result) {
-            this.service.registration(data.data);
-        }
-    }
 }

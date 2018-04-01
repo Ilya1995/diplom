@@ -1,5 +1,6 @@
 <div class="modal-background">
-    <form id='login-form' (keyup.enter)="confirm(login.value, pass1.value, pass2.value, name.value, email.value)">
+    <form id='login-form' (keyup.enter)="confirm({phone: phone.value, pass: pass.value, name: name.value,
+                                                  serial: serial.value, number: number.value, email: email.value})">
         <div class="container">
             <div class='alpha-inner'>
                 <h1 class='text-center page-header'>Регистрация</h1>

@@ -2,24 +2,24 @@
     <div style="border: 2px solid #292828; width: 95%; margin: auto; border-radius: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.5);">
 
         <div style="float: right; margin: 30px">
-            <button type="button" (click)="getClients()" class="btn btn-small btn-primary">Поиск клиента</button>
-            <input type="text" (keyup.enter)="getClients()" [(ngModel)]="seachClient" placeholder = "Введите имя..." style="padding: 4px; margin-left: -5px">
+            <button type="button" (click)="getPatients()" class="btn btn-small btn-primary">Поиск пациента</button>
+            <input type="text" (keyup.enter)="getPatients()" [(ngModel)]="seachPatient" placeholder = "Введите имя пациента..." style="padding: 4px; margin-left: -5px">
         </div>
 
         <table class="table table-bordered table-hover sales_team-table scrolling-table" style="border: 2px solid #292828;">
             <thead>
                 <tr>
-                    <th width="400px">Имя</th>
+                    <th width="400px">ФИО</th>
                     <th width="400px">Номер телефона</th>
                     <th width="400px">Дата регистрации</th>
                 </tr>
             </thead>
 
             <tbody>
-                <tr *ngFor="let client of clients" (click)="selectClient(client.id)">
-                    <td width="370px" class='clickable'>{{client.name}}</td>
-                    <td width="400px" class='clickable'>{{client.phone}}</td>
-                    <td width="400px">{{client.date}}</td>
+                <tr *ngFor="let patient of patients" (click)="selectPatient(patient.id)">
+                    <td width="370px" class='clickable'>{{patient.name}}</td>
+                    <td width="400px" class='clickable'>{{patient.phone}}</td>
+                    <td width="400px">{{patient.date}}</td>
                     <!--<button (click)="updateRole(client)">Изменить</button>-->
                 </tr>
             </tbody>

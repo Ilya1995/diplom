@@ -1,34 +1,30 @@
 import {Component, OnInit} from "@angular/core";
 import {UserService} from "../services/user.service";
 import {ActivatedRoute, Params} from "@angular/router";
-import {ClientModel} from "./client.model";
+import {PatientModel} from "./patient.model";
 
 @Component({
     moduleId: module.id,
-    selector: "client",
-    templateUrl: "client.component.html",
-    styleUrls: ["client.component.css"]
+    selector: "patient",
+    templateUrl: "patient.component.html",
+    styleUrls: ["patient.component.css"]
 })
-export class ClientComponent implements OnInit{
+export class PatientComponent implements OnInit{
     constructor(private activatedRoute: ActivatedRoute, private service: UserService) {}
 
-    client = {};
+    patient = {};
     ngOnInit() {
         this.activatedRoute.params.forEach((params: Params) => {
             let id = +params['id'];
             console.log(id);
-            this.service.getClient({id: id}, (err, data: ClientModel) => {
+            this.service.getPatient({id: id}, (err, data: PatientModel) => {
                 if (err) {
                     console.error(err);
                 } else {
                     console.log(data);
-                    this.client = data;
+                    this.patient = data;
                 }
             });
         });
-    }
-
-    addRole(){
-        console.log(this.client);
     }
 }

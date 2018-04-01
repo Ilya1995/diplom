@@ -2,7 +2,8 @@
     System.config({
         paths: {
             // npm - используется как псевдоним
-            'npm:': 'node_modules/'
+            'npm:': 'node_modules/',
+            underscore: './node_modules/underscore/underscore.js'
         },
         // указывает загрузчику где искать нужные элементы
         map: {

@@ -13,7 +13,7 @@ module.exports.auth = function (params, callback) {
 
     async.waterfall([
         function (callback) {
-            var select = "select id, name from clients where phone=$1 and password=$2;";
+            var select = "select id, name from users where phone=$1 and password=$2;";
 
             client.query(select, [params.login, params.password], function(err, res) {
                 if (err) {
@@ -26,16 +26,13 @@ module.exports.auth = function (params, callback) {
             });
         },
         function (data, callback) {
-            var select = "SELECT roles.id, roles.name FROM clients_roles " +
-                "INNER JOIN roles ON clients_roles.role_id = roles.id " +
-                "where clients_roles.client_id = $1;";
+            var select = "SELECT roles.name FROM users INNER JOIN roles ON users.role_id = roles.id where users.id = $1;";
             client.query(select, [data.id], function(err, res) {
                 if (err) {
                     console.error(err);
                     return callback('Ошибка обращения к БД');
                 }
-                if (!res.rows.length) return callback('Для пользователя не найдено ролей');
-                data.roles = res.rows;
+                data.roleName = res.rows[0].name;
                 return callback(null, data);
             });
         }

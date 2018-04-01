@@ -1,0 +1,43 @@
+<div class="modal-background">
+    <form id='login-form' (keyup.enter)="confirm()">
+        <div class="container">
+            <div class='alpha-inner'>
+                <h1 class='text-center page-header'>Новый {{worker=='admin' ? 'Администратор' : 'Доктор'}}</h1>
+            </div>
+            <div class='form-group' style="display: block;height: 330px;overflow: hidden;overflow-y: auto;">
+                <label class='text-label'>Номер телефона</label>
+                <input type='text' class='form-control' name="phone" [(ngModel)]="newWorker.phone"/>
+
+                <label class='text-label'>Пароль</label>
+                <input type='password' class='form-control' name="pass" [(ngModel)]="newWorker.pass"/>
+
+                <label class='text-label'>ФИО</label>
+                <input type='text' class='form-control' name="name" [(ngModel)]="newWorker.name"/>
+
+                <div *ngIf="worker=='doctor'">
+                    <label class='text-label'>Стаж работы</label>
+                    <input type='text' class='form-control' name="experience" [(ngModel)]="newWorker.experience"/>
+                </div>
+
+                <div *ngIf="worker=='doctor'">
+                    <label class='text-label'>Специализация врача</label>
+                    <select [(ngModel)]="selectedValue" name="selectType" class='form-control'>
+                        <option *ngFor="let type of doctorTypes" [ngValue]="type">{{type.name}}</option>
+                    </select>
+                </div>
+
+                <label class='text-label'>E-mail</label>
+                <input class='form-control' name="email" [(ngModel)]="newWorker.email"/>
+            </div>
+            <div class='footer reg-form'>
+                <a class='btn-l btn-blue btn-indent btn-medium' (click)="close()">
+                    Отмена
+                </a>
+                <a class='btn-r btn-blue btn-indent btn-medium'
+                   (click)="confirm()">
+                    Подтвердить
+                </a>
+            </div>
+        </div>
+    </form>
+</div>

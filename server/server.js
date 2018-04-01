@@ -27,9 +27,12 @@ app.listen(app.get('port'), app.get('host'), function (err) {
     }
 });
 
-app.post(apiPrefix + '/registration', handler.regClient);
+app.post(apiPrefix + '/registration', handler.regPatient);
 app.post(apiPrefix + '/authentication', handler.auth);
 app.get(apiPrefix + '/getLoggedUser', handler.getLoggedUser);
 app.get(apiPrefix + '/logout', handler.logout);
-app.post(apiPrefix + '/getClients', handler.getClients);
-app.get(apiPrefix + '/getClient/:id', handler.getClient);
+app.post(apiPrefix + '/getPatients', handler.getPatients);
+app.post(apiPrefix + '/getDoctors', handler.getDoctors);
+app.get(apiPrefix + '/getPatient/:id', handler.getPatient);
+app.get(apiPrefix + '/getDoctorTypes', handler.getDoctorTypes);
+app.post(apiPrefix + '/addWorker', handler.addWorker);

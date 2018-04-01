@@ -1,0 +1,30 @@
+<div style="padding-top: 150px;">
+    <div style="border: 2px solid #292828; width: 95%; margin: auto; border-radius: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.5);">
+
+        <div style="float: right; margin: 30px">
+            <button type="button" (click)="getDoctors()" class="btn btn-small btn-primary">Поиск доктора</button>
+            <input type="text" (keyup.enter)="getDoctors()" [(ngModel)]="seachDoctor" placeholder = "Введите имя доктора..." style="padding: 4px; margin-left: -5px">
+        </div>
+
+        <table class="table table-bordered table-hover sales_team-table scrolling-table" style="border: 2px solid #292828;">
+            <thead>
+            <tr>
+                <th width="400px">ФИО</th>
+                <th width="400px">Специализация</th>
+                <th width="400px">Стаж работы(год)</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr *ngFor="let doctor of doctors" (click)="selectDoctor(doctor.id)">
+                <td width="370px" class='clickable'>{{doctor.name}}</td>
+                <td width="400px" class='clickable'>{{doctor.type_name}}</td>
+                <td width="400px" class='clickable'>{{doctor.experience}}</td>
+            </tr>
+            </tbody>
+        </table>
+        <!--<a>-->
+            <!--<img src="https://mongroup.ru/resources/small_37787dd62acd4.jpg">-->
+        <!--</a>-->
+    </div>
+</div>

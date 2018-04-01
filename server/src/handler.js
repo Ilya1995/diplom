@@ -2,26 +2,59 @@
 
 const authentication = require('./authentication');
 const registration = require('./registration');
+const patients = require('./patients');
+const doctors = require('./doctors');
 const users = require('./users');
+// var _ = require('underscore');
 // var async = require('async');
 
-module.exports.getClient = function (req, res) {
-    users.getClient(req.params, function (err, data) {
+// var newIdRoles = _.pluck(_.filter(params.roles, function (role) {return role.isUsed === true;}), 'id');
+// _.each(oldIdRoles, function (oldRole) {
+//     if(!_.find(newIdRoles, function(idRole){ return idRole === oldRole.role_id})) {
+//         deleteIds.push(oldRole.id);
+//     } else {
+//         newIdRoles.splice(newIdRoles.indexOf(oldRole.role_id),1);
+//     }
+// });
+
+module.exports.addWorker = function (req, res) {
+    users.addWorker(req.body, function (err) {
+        if (err) return res.send({result: false, note: err});
+        return res.send({result: true});
+    });
+};
+
+module.exports.getDoctorTypes = function (req, res) {
+    doctors.getDoctorTypes(function (err, data) {
         if (err) return res.send({result: false, note: err});
         return res.send({result: true, data: data});
     });
 };
 
-module.exports.getClients = function (req, res) {
-    users.getClients(req.body, function (err, data) {
+module.exports.getDoctors = function (req, res) {
+    doctors.getDoctors(req.body, function (err, data) {
         if (err) return res.send({result: false, note: err});
         return res.send({result: true, data: data});
     });
 };
 
-module.exports.regClient = function (req, res) {
+module.exports.getPatient = function (req, res) {
+    patients.getPatient(req.params, function (err, data) {
+        if (err) return res.send({result: false, note: err});
+        return res.send({result: true, data: data});
+    });
+};
+
+module.exports.getPatients = function (req, res) {
+    patients.getPatients(req.body, function (err, data) {
+        if (err) return res.send({result: false, note: err});
+        return res.send({result: true, data: data});
+    });
+};
+
+module.exports.regPatient = function (req, res) {
     console.log(req.body);
-    registration.regClient(req.body, function (err) {
+    registration.regPatient(req.body, function (err) {
         if (err) return res.send({result: false, note: err});
         return res.send({result: true, data: 'Новый пользватель зарегистрирован'});
     });

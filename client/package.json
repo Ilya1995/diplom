@@ -28,7 +28,8 @@
     "rxjs": "^5.0.0",
     "systemjs": "0.19.27",
     "typescript.events": "^7.9.0",
-    "zone.js": "^0.8.20"
+    "zone.js": "^0.8.20",
+    "underscore": "^1.8.3"
   },
   "devDependencies": {
     "concurrently": "^2.2.0",

@@ -10,8 +10,7 @@ import {Router} from "@angular/router";
 })
 export class NavMenuComponent implements OnInit{
     user = null;
-    countries = [];
-    selectedValue = 'Пациент';
+    worker: string = '';
 
     constructor(private router: Router, private service: UserService) {}
 
@@ -21,8 +20,6 @@ export class NavMenuComponent implements OnInit{
                 console.error(err);
             } else {
                 this.user = data;
-                this.countries = data.roles;
-                this.selectedValue = this.countries[0];
                 console.log(data);
             }
         });
@@ -30,8 +27,6 @@ export class NavMenuComponent implements OnInit{
 
     isAunt(data) {
         this.user = data;
-        this.countries = data.roles;
-        this.selectedValue = this.countries[0];
         console.log(data);
     }
 
@@ -44,6 +39,19 @@ export class NavMenuComponent implements OnInit{
                 this.user = null;
             }
         });
+    }
+
+    private isModalDialogVisible: boolean = false;
+    private showDialogCreateWorker(worker: string) {
+        this.worker = worker;
+        this.isModalDialogVisible = true;
+    }
+
+    private closeModalCreateWorker(data) {
+        this.isModalDialogVisible = false;
+        if (data.result) {
+            this.service.addWorker(data.data);
+        }
     }
 
     home() {

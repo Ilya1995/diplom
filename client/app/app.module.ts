@@ -3,8 +3,9 @@ import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 import { HttpModule } from "@angular/http";
 import { AppComponent } from "./app.component";
-import { NavMenuComponent, AuntFormComponent, RegistrationFormComponent, ClientComponent,
-    NotificationComponent, PopupComponent, ClientsTableComponent, routing, HomeComponent } from "./index";
+import { NavMenuComponent, AuntFormComponent, RegistrationFormComponent, PatientComponent, CreateWorkerFormComponent,
+    NotificationComponent, PopupComponent, PatientsTableComponent, routing, HomeComponent, DoctorTableComponent
+} from "./index";
 import { UserService } from "./services/user.service";
 import { PopupService } from "./services/popup.service";
 import { NotificationService } from "./services/notification.service";
@@ -16,8 +17,8 @@ import { NotificationService } from "./services/notification.service";
         HttpModule,
         routing],
     declarations: [
-        AppComponent, NavMenuComponent, AuntFormComponent, ClientsTableComponent, HomeComponent,
-        RegistrationFormComponent, NotificationComponent, PopupComponent, ClientComponent],
+        AppComponent, NavMenuComponent, AuntFormComponent, PatientsTableComponent, HomeComponent, CreateWorkerFormComponent,
+        RegistrationFormComponent, NotificationComponent, PopupComponent, PatientComponent, DoctorTableComponent],
     providers: [UserService, PopupService, NotificationService],
     bootstrap: [AppComponent]
 })

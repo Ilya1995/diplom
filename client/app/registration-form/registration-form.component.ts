@@ -1,8 +1,8 @@
-import {Component, ViewEncapsulation, Output, EventEmitter} from "@angular/core";
+import {Component, ViewEncapsulation} from "@angular/core";
 import { UserService } from "../services/user.service";
-import { PopupService } from "../services/popup.service";
 import {NotificationService} from "../services/notification.service";
 import {NotificationModel} from "../notification/notification.model";
+import {Router} from "@angular/router";
 
 @Component({
     moduleId: module.id,
@@ -12,9 +12,7 @@ import {NotificationModel} from "../notification/notification.model";
     encapsulation: ViewEncapsulation.Emulated
 })
 export class RegistrationFormComponent {
-    constructor(private service: UserService, private popupService: PopupService, private notificationService: NotificationService) {}
-
-    @Output() isConfirmed = new EventEmitter();
+    constructor(private router: Router, private service: UserService, private notificationService: NotificationService) {}
 
     private confirm(params) {
         // if (!params.login || !params.pass1 || !params.pass2 || !params.name) {
@@ -25,11 +23,12 @@ export class RegistrationFormComponent {
         //     this.notificationService.showToast(new NotificationModel('Eггoгo', 'Пароли не совпадают'));
         //     return;
         // }
-        this.isConfirmed.emit({result: true, data: params});
+        this.service.registration(params);
+        this.router.navigate(['home']);
     }
 
     private close() {
-        this.isConfirmed.emit({result: false});
+        this.router.navigate(['home']);
     }
 
 }
