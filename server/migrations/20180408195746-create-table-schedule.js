@@ -1,9 +1,10 @@
 var async = require('async');
 
 exports.up = function(db, callback) {
-    async.waterfall([
+    async.series([
         function (callback) {
-            var sql = "ALTER TABLE clients ADD COLUMN date_reg TIMESTAMP;";
+            var sql = "CREATE TABLE IF NOT EXISTS schedule (id SERIAL PRIMARY KEY, " +
+                "user_patient_id INT NOT NULL, date_record TIMESTAMP);";
             db.runSql(sql, function (err) {
                 if (err) {
                     console.error('error1');

@@ -1,0 +1,52 @@
+<div style="padding-top: 150px; padding-bottom: 50px">
+    <div style="border: 2px solid #292828; width: 95%; margin: auto; border-radius: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.5);">
+        <form style="margin: auto; margin-bottom: 40px; margin-top: 40px;">
+            <h3 style="text-align: center">Информация о докторе</h3>
+            <div style="margin-left:20%; margin-right:20%">
+                <img style="float: right" src="app/doctor/images/blank_doctor.svg">
+                <label style="padding-top: 20px" class='text-label'>ФИО</label>
+                <input readonly type='text' style="width:75%" class='form-control' [(value)]="doctor.name">
+                <label style="padding-top: 20px" class='text-label'>Стаж работы (год)</label>
+                <input readonly type='text' style="width:75%" class='form-control' [(value)]="doctor.experience">
+                <label style="padding-top: 20px" class='text-label'>Специализация</label>
+                <input readonly type='text' class='form-control' [(value)]="doctor.type_name">
+
+                <div *ngIf="user && user.roleName=='Пациент'">
+                    <label style="padding-top: 20px" class='text-label'>Желаемая дата и время приёма</label>
+                    <input type='date' [(ngModel)]="date.selectedDate" name="date" class='form-control'>
+                    <select [(ngModel)]="date.selectedHour" name="selectHour">
+                        <option *ngFor="let hour of hours" [ngValue]="hour">{{hour}}</option>
+                    </select>:
+                    <select [(ngModel)]="date.selectedMinute" name="selectMinute">
+                        <option *ngFor="let minute of minutes" [ngValue]="minute">{{minute}}</option>
+                    </select>
+                    <br>
+                </div>
+
+
+                <div *ngIf="user && user.roleName=='Администратор'">
+                    <label style="padding-top: 20px" class='text-label'>Номер телефона</label>
+                    <input readonly type='text' class='form-control' [(value)]="doctor.phone">
+                    <label style="padding-top: 20px" class='text-label'>Электронный адрес</label>
+                    <input readonly type='text' class='form-control' [(value)]="doctor.email">
+                    <label style="padding-top: 20px" class='text-label'>Дата регистрации</label>
+                    <input readonly type='text' class='form-control' [(value)]="doctor.date">
+
+                    <div style="margin-top: 20px;">
+                        <button>Расписание доктора</button>
+                    </div>
+                </div>
+
+                <div class='footer' style="margin-top: 20px; padding-bottom: 20px;">
+                    <a *ngIf="user.roleName=='Пациент'" class='btn-r btn-blue btn-indent' (click)="enroll()" style="margin-left: 40%">
+                        Записаться на приём
+                    </a>
+                    <a class='btn-r btn-blue btn-indent' routerLink="/doctors" routerLinkActive="active">
+                        Назад
+                    </a>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -8,6 +8,126 @@ import {NotificationService} from "./notification.service";
 export class UserService {
     constructor(private http: Http, private popupService: PopupService, private notificationService: NotificationService) {}
 
+    getScheduleDoctor(data, callback) {
+        let url = '/api/getScheduleDoctor/' + data.id;
+        let headers = new Headers({'Content-Type': 'application/json'});
+        let options = new RequestOptions({headers});
+        this.http.get(url, options)
+            .subscribe(
+                (result) => {
+                    let json = result.json();
+                    console.log(json);
+                    if (json.result) {
+                        return callback(null, json.data);
+                    }
+                    return callback(json.note);
+                },
+                (error) => {
+                    console.error(error);
+                    return callback(error);
+                }
+            )
+    }
+
+    addRecord(params, callback) {
+        let url = '/api/addRecord';
+        let headers = new Headers({'Content-Type': 'application/json'});
+        let options = new RequestOptions({headers});
+        this.http.post(url, params, options)
+            .subscribe(
+                (result) => {
+                    let json = result.json();
+                    console.log(json);
+                    if (json.result) {
+                        this.notificationService.showToast(new NotificationModel('Информация', 'Запись добавлена'));
+                        return callback(true);
+                    } else {
+                        this.notificationService.showToast(new NotificationModel('Ошибка', 'Запись не добавлена'));
+                        return callback(false);
+                    }
+
+                },
+                (error) => {
+                    console.error(error);
+                    this.notificationService.showToast(new NotificationModel('Ошибка', 'Запись не добавлена'));
+                    return callback(false);
+                }
+            )
+    }
+
+    deleteRecord(params,callback) {
+        let url = '/api/deleteRecord';
+        let headers = new Headers({'Content-Type': 'application/json'});
+        let options = new RequestOptions({headers});
+        this.http.post(url, params, options)
+            .subscribe(
+                (result) => {
+                    let json = result.json();
+                    console.log(json);
+                    if (json.result) {
+                        this.notificationService.showToast(new NotificationModel('Информация', 'Запись удалена'));
+                        return callback(true);
+                    } else {
+                        this.notificationService.showToast(new NotificationModel('Ошибка', 'Запись не удалена'));
+                        return callback(false);
+                    }
+
+                },
+                (error) => {
+                    console.error(error);
+                    this.notificationService.showToast(new NotificationModel('Ошибка', 'Запись не удалена'));
+                    return callback(false);
+                }
+            )
+    }
+
+    getNewRecords(callback) {
+        let url = '/api/getNewRecords';
+        let headers = new Headers({'Content-Type': 'application/json'});
+        let options = new RequestOptions({headers});
+        this.http.get(url, options)
+            .subscribe(
+                (result) => {
+                    let json = result.json();
+                    console.log(json);
+                    if (json.result) {
+                        return callback(null, json.data);
+                    }
+                    return callback(json.note);
+                },
+                (error) => {
+                    console.error(error);
+                    return callback(error);
+                }
+            )
+    }
+
+    //создать новую запись на приём к врачу
+    newEntryForAdmission(data) {
+        let url = '/api/newEntryForAdmission';
+        let headers = new Headers({'Content-Type': 'application/json'});
+        let options = new RequestOptions({headers});
+        this.http.post(url, data, options)
+            .subscribe(
+                (result) => {
+                    let json = result.json();
+                    console.log(json);
+                    if (json.result) {
+                        this.popupService.showPopup({header: 'Информация', description: 'Ваша заявка будет рассмотрена. Вам перезвонят.'},
+                            ()=>{});
+                    } else {
+                        this.popupService.showPopup({header: 'Ошибка', description: 'Повторите попытку позже!'},
+                            ()=>{});
+                    }
+                },
+                (error) => {
+                    console.error(error);
+                    this.popupService.showPopup({header: 'Ошибка', description: 'Повторите попытку позже!'},
+                        ()=>{});
+                }
+            )
+    }
+
     addWorker(data) {
         let url = '/api/addWorker';
         let headers = new Headers({'Content-Type': 'application/json'});
@@ -35,6 +155,27 @@ export class UserService {
 
     getDoctorTypes(callback) {
         let url = '/api/getDoctorTypes';
+        let headers = new Headers({'Content-Type': 'application/json'});
+        let options = new RequestOptions({headers});
+        this.http.get(url, options)
+            .subscribe(
+                (result) => {
+                    let json = result.json();
+                    console.log(json);
+                    if (json.result) {
+                        return callback(null, json.data);
+                    }
+                    return callback(json.note);
+                },
+                (error) => {
+                    console.error(error);
+                    return callback(error);
+                }
+            )
+    }
+
+    getDoctor(data, callback) {
+        let url = '/api/getDoctor/' + data.id;
         let headers = new Headers({'Content-Type': 'application/json'});
         let options = new RequestOptions({headers});
         this.http.get(url, options)

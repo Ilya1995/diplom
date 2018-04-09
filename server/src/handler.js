@@ -17,6 +17,41 @@ const users = require('./users');
 //     }
 // });
 
+module.exports.getScheduleDoctor = function (req, res) {
+    doctors.getScheduleDoctor(req.params, function (err, data) {
+        if (err) return res.send({result: false, note: err});
+        return res.send({result: true, data: data});
+    });
+};
+
+module.exports.addRecord = function (req, res) {
+    users.addRecord(req.body, function (err) {
+        if (err) return res.send({result: false, note: err});
+        return res.send({result: true});
+    });
+};
+
+module.exports.deleteRecord = function (req, res) {
+    users.deleteRecord(req.body, function (err) {
+        if (err) return res.send({result: false, note: err});
+        return res.send({result: true});
+    });
+};
+
+module.exports.getNewRecords = function (req, res) {
+    users.getNewRecords(function (err,data) {
+        if (err) return res.send({result: false, note: err});
+        return res.send({result: true, data: data});
+    });
+};
+
+module.exports.newEntryForAdmission = function (req, res) {
+    users.newEntryForAdmission(req.body, function (err) {
+        if (err) return res.send({result: false, note: err});
+        return res.send({result: true});
+    });
+};
+
 module.exports.addWorker = function (req, res) {
     users.addWorker(req.body, function (err) {
         if (err) return res.send({result: false, note: err});
@@ -26,6 +61,13 @@ module.exports.addWorker = function (req, res) {
 
 module.exports.getDoctorTypes = function (req, res) {
     doctors.getDoctorTypes(function (err, data) {
+        if (err) return res.send({result: false, note: err});
+        return res.send({result: true, data: data});
+    });
+};
+
+module.exports.getDoctor = function (req, res) {
+    doctors.getDoctor(req.params, function (err, data) {
         if (err) return res.send({result: false, note: err});
         return res.send({result: true, data: data});
     });

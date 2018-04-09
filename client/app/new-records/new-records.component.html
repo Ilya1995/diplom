@@ -1,0 +1,26 @@
+<div style="padding-top: 150px;">
+    <div style="border: 2px solid #292828; width: 95%; margin: auto; border-radius: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.5);">
+
+        <table class="table table-bordered table-hover sales_team-table scrolling-table" style="border: 2px solid #292828; margin-top: 40px;">
+            <thead>
+            <tr>
+                <th width="400px">Пациент</th>
+                <th width="400px">Доктор</th>
+                <th width="400px">Желаемое время записи</th>
+                <th width="400px">Действие</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr *ngFor="let record of newRecords; let i = index">
+                <td width="370px" class='clickable'>{{record.patient}}</td>
+                <td width="400px" class='clickable'>{{record.doctor}}</td>
+                <td width="400px" class='clickable'>{{record.date}}</td>
+                <td width="400px" class='clickable'>
+                    <button (click)="addRecord(record.id, i)">+</button><button (click)="deleteRecord(record.id, i)">-</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

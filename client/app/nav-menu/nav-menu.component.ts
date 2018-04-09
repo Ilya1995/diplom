@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { UserService } from "../services/user.service";
 import {Router} from "@angular/router";
+import {ParamsModel} from "../services/paramsModel";
 
 @Component({
     moduleId: module.id,
@@ -12,7 +13,7 @@ export class NavMenuComponent implements OnInit{
     user = null;
     worker: string = '';
 
-    constructor(private router: Router, private service: UserService) {}
+    constructor(private router: Router, private service: UserService, private paramsModel: ParamsModel) {}
 
     ngOnInit() {
         this.service.getLoggedUser((err, data) => {
@@ -20,6 +21,7 @@ export class NavMenuComponent implements OnInit{
                 console.error(err);
             } else {
                 this.user = data;
+                this.paramsModel.setUser(data);
                 console.log(data);
             }
         });
@@ -27,6 +29,7 @@ export class NavMenuComponent implements OnInit{
 
     isAunt(data) {
         this.user = data;
+        this.paramsModel.setUser(data);
         console.log(data);
     }
 

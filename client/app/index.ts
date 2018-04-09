@@ -7,5 +7,8 @@ export * from "./patients-table/patients-table.component";
 export * from "./popup/popup.component";
 export * from "./patient/patient.component";
 export * from "./home/home.component";
-export * from "./doctor-table/doctor-table.component"
-export * from "./create-worker-form/create-worker-form.component"
+export * from "./doctor-table/doctor-table.component";
+export * from "./create-worker-form/create-worker-form.component";
+export * from "./doctor/doctor.component";
+export * from "./new-records/new-records.component";
+export * from "./schedule/schedule.component";

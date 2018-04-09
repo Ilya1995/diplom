@@ -10,6 +10,11 @@
 // INSERT INTO clients (balance,name,email,login,password)
 // VALUES (1000, 'test1', '', 'test1', 'test1');
 
+// вывод всех таблиц
+// select table_name
+// from information_schema.tables
+// where table_schema='public';
+
 var async = require('async');
 
 exports.up = function(db, callback) {
