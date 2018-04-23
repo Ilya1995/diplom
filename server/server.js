@@ -42,3 +42,4 @@ app.get(apiPrefix + '/getNewRecords', handler.getNewRecords);
 app.post(apiPrefix + '/deleteRecord', handler.deleteRecord);
 app.post(apiPrefix + '/addRecord', handler.addRecord);
 app.get(apiPrefix + '/getScheduleDoctor/:id', handler.getScheduleDoctor);
+app.delete(apiPrefix + '/deletePatient/:id', handler.deletePatient);

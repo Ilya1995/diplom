@@ -17,6 +17,13 @@ const users = require('./users');
 //     }
 // });
 
+module.exports.deletePatient = function (req, res) {
+    patients.deletePatient(req.params, function (err) {
+        if (err) return res.send({result: false, note: err});
+        return res.send({result: true});
+    });
+};
+
 module.exports.getScheduleDoctor = function (req, res) {
     doctors.getScheduleDoctor(req.params, function (err, data) {
         if (err) return res.send({result: false, note: err});

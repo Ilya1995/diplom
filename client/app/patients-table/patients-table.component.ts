@@ -30,4 +30,10 @@ export class PatientsTableComponent {
             }
         });
     }
+
+    deletePatient(id, index) {
+        this.service.deletePatient({patientId: id}, (res) => {
+            res ? this.patients.splice(index, 1) : null;
+        });
+    }
 }

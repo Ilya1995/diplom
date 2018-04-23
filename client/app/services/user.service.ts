@@ -8,6 +8,32 @@ import {NotificationService} from "./notification.service";
 export class UserService {
     constructor(private http: Http, private popupService: PopupService, private notificationService: NotificationService) {}
 
+    deletePatient(data, callback) {
+        console.log(data);
+        let url = '/api/deletePatient/' + data.patientId;
+        let headers = new Headers({'Content-Type': 'application/json'});
+        let options = new RequestOptions({headers});
+        this.http.delete(url, options)
+            .subscribe(
+                (result) => {
+                    let json = result.json();
+                    console.log(json);
+                    if (json.result) {
+                        this.notificationService.showToast(new NotificationModel('Информация', 'Пациент удалён'));
+                        return callback(true);
+                    } else {
+                        this.notificationService.showToast(new NotificationModel('Ошибка', 'Пациент не был удалён'));
+                        return callback(false);
+                    }
+                },
+                (error) => {
+                    console.error(error);
+                    this.notificationService.showToast(new NotificationModel('Ошибка', 'Пациент не был удалён'));
+                    return callback(false);
+                }
+            )
+    }
+
     getScheduleDoctor(data, callback) {
         let url = '/api/getScheduleDoctor/' + data.id;
         let headers = new Headers({'Content-Type': 'application/json'});
@@ -292,6 +318,7 @@ export class UserService {
                     if (json.result) {
                         return callback(null, json.data);
                     }
+                    this.popupService.showPopup({header: 'Ошибка', description: json.note},()=>{});
                     return callback(json.note);
                 },
                 (error) => {

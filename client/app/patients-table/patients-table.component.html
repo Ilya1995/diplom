@@ -16,11 +16,13 @@
             </thead>
 
             <tbody>
-                <tr *ngFor="let patient of patients" (click)="selectPatient(patient.id)">
-                    <td width="370px" class='clickable'>{{patient.name}}</td>
-                    <td width="400px" class='clickable'>{{patient.phone}}</td>
-                    <td width="400px">{{patient.date}}</td>
-                    <!--<button (click)="updateRole(client)">Изменить</button>-->
+                <tr *ngFor="let patient of patients; let i = index">
+                    <td width="370px" class='clickable' (click)="selectPatient(patient.id)">{{patient.name}}</td>
+                    <td width="400px" class='clickable' (click)="selectPatient(patient.id)">{{patient.phone}}</td>
+                    <td width="400px">
+                        {{patient.date}}
+                        <button style="float: right;" title="Удалить пациента" (click)="deletePatient(patient.id, i)">X</button>
+                    </td>
                 </tr>
             </tbody>
         </table>
