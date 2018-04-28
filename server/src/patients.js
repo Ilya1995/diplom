@@ -1,7 +1,5 @@
-const pg = require('pg');
 var config = require('../config/mainConfig').config;
-var async = require('async');
-var _ = require('underscore');
+var request = require('request');
 
 /**
  * Удаление пациента из БД
@@ -9,25 +7,10 @@ var _ = require('underscore');
  * @param callback
  */
 module.exports.deletePatient = function (params, callback) {
-    const client = new pg.Client(config.database.postgresql);
-    client.connect();
-
-    async.waterfall([
-        function (callback) {
-            var sql = "delete from users where id = $1;";
-            client.query(sql, [params.id], function (err) {
-                if (err) {
-                    console.error(err.message);
-                    return callback('Ошибка при удалении пациента');
-                }
-                return callback(null);
-            });
-        }
-    ], function (err) {
-        client.end();
-        if (err) {
+    sendReq('DELETE', 'deletePatient/'+params.id, null, function (err, data) {
+        if (err || !data.result) {
             console.error(err);
-            return callback(err);
+            return callback('Ошибка при удалении записи из бд');
         }
         return callback(null);
     });
@@ -39,30 +22,12 @@ module.exports.deletePatient = function (params, callback) {
  * @param callback
  */
 module.exports.getPatient = function (params, callback) {
-    const client = new pg.Client(config.database.postgresql);
-    client.connect();
-
-    async.waterfall([
-        function (callback) {
-            var sql = "select users.id, users.name, phone, email, to_char(date_reg, 'dd.mm.YYYY') as date, roles.name, " +
-                "patient.serial, patient.number from users INNER JOIN roles ON users.role_id = roles.id " +
-                "INNER JOIN patient ON users.patient_doctor_id = patient.id where role_id = 2 and " +
-                "patient_doctor_id is not null  and users.id = $1;";
-            client.query(sql, [params.id], function (err, res) {
-                if (err) {
-                    console.error(err.message);
-                    return callback('Ошибка чтения клиентов');
-                }
-                return callback(null, res.rows[0]);
-            });
-        }
-    ], function (err, data) {
-        client.end();
-        if (err) {
+    sendReq('GET', 'getPatient/'+params.id, null, function (err, data) {
+        if (err || !data.result) {
             console.error(err);
-            return callback(err);
+            return callback('Ошибка при получении записи из бд');
         }
-        return callback(null, data);
+        return callback(null, data.data);
     });
 };
 
@@ -71,18 +36,35 @@ module.exports.getPatient = function (params, callback) {
  * @param callback
  */
 module.exports.getPatients = function (params, callback) {
-    console.log(params);
-    const client = new pg.Client(config.database.postgresql);
-    client.connect();
-    var sql = "select id, name, phone, email, to_char(date_reg, 'dd.mm.YYYY') as date from users where role_id = 2 " +
-        "and patient_doctor_id is not null and name ilike $1;";
-    client.query(sql, ['%'+params.name+'%'], function (err, res) {
-        client.end();
-        if (err) {
-            console.error(err.message);
-            return callback('Ошибка чтения клиентов');
+    sendReq('POST', 'getPatients', {name: params.name}, function (err, data) {
+        if (err || !data.result) {
+            console.error(err);
+            return callback('Ошибка при получении записи из бд');
         }
-        console.error(res.rows);
-        return callback(null, res.rows);
+        return callback(null, data.data);
     });
 };
+
+function sendReq(method, func, body, callback) {
+    var primaryUrl = config.module_pers_inf.host+':'+config.module_pers_inf.port+'/api/';
+    var reqParams = {
+        method: method,
+        url: primaryUrl+func,
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+    body ? reqParams.body = JSON.stringify(body) : null;
+    request(reqParams, function (err, res, body) {
+        if (err) {
+            return callback(err);
+        }
+        try {
+            body = JSON.parse(body);
+            console.log(body);
+        } catch (e) {
+            return callback('Ошибка при парсинге ответа');
+        }
+        return callback(null, body);
+    });
+}

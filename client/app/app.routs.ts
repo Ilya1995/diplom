@@ -7,6 +7,7 @@ import { DoctorTableComponent } from "./doctor-table/doctor-table.component";
 import { DoctorComponent } from "./doctor/doctor.component";
 import { NewRecordsComponent } from "./new-records/new-records.component";
 import { ScheduleComponent } from "./schedule/schedule.component";
+import { LicenseComponent } from "./license/license.component";
 
 const appRoutes: Routes = [
     { path: "", redirectTo: "home", pathMatch: "full" },
@@ -18,6 +19,7 @@ const appRoutes: Routes = [
     { path: "doctor/:id", component: DoctorComponent },
     { path: "new_records", component: NewRecordsComponent },
     { path: "schedule/:id", component: ScheduleComponent },
+    { path: "license", component: LicenseComponent },
 ];
 
 export const routing = RouterModule.forRoot(appRoutes);

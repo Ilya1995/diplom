@@ -1,5 +1,7 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
 import { UserService } from "../services/user.service";
+import {NotificationModel} from "../notification/notification.model";
+import {NotificationService} from "../services/notification.service";
 
 @Component({
     moduleId: module.id,
@@ -11,12 +13,12 @@ export class AuntFormComponent {
     @Input() user;
     @Output() isAunt = new EventEmitter();
 
-    constructor(private service: UserService) {}
+    constructor(private service: UserService, private notificationService: NotificationService) {}
 
 
     entry(login, password) {
         if (!login || !password) {
-            alert('Заполни оба поля');
+            this.notificationService.showToast(new NotificationModel('Eггoгo', 'Заполните оба поля'));
             return;
         }
         this.service.authorization({login: login, password: password},(err, data) => {

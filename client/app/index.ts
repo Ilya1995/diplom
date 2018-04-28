@@ -12,3 +12,4 @@ export * from "./create-worker-form/create-worker-form.component";
 export * from "./doctor/doctor.component";
 export * from "./new-records/new-records.component";
 export * from "./schedule/schedule.component";
+export * from "./license/license.component";

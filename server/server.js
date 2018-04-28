@@ -23,7 +23,7 @@ app.listen(app.get('port'), app.get('host'), function (err) {
     if (err) {
         console.error('Ошибка при запуске сервера', err);
     } else {
-        console.info('Сервер API_GW запущен на порту ' + app.get('port'));
+        console.info('Сервер запущен на порту ' + app.get('port'));
     }
 });
 

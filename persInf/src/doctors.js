@@ -1,7 +1,69 @@
 const pg = require('pg');
 var config = require('../config/mainConfig').config;
 var async = require('async');
-var _ = require('underscore');
+
+/**
+ * Добавить новую запись в расписание доктора
+ * @param params.user_patient_id - id пациента
+ * @param params.patient_doctor_id - id доктора
+ * @param params.date - дата записи на приём
+ * @param callback
+ */
+module.exports.newSchedule = function (params, callback) {
+    console.log(params);
+    const client = new pg.Client(config.database.postgresql);
+    client.connect();
+    async.waterfall([
+        function (callback) {
+            var sql = "INSERT INTO schedule (user_patient_id, date_record) VALUES ($1,$2) RETURNING id;";
+            client.query(sql, [params.user_patient_id, params.date], function (err, res) {
+                if (err) {
+                    console.error(err.message);
+                    return callback('Ошибка добавления новой записи в бд');
+                }
+                return callback(null, res.rows[0].id);
+            });
+        },
+        function (scheduleId, callback) {
+            var sql = "INSERT INTO doctors_schedules (doctor_id,schedule_id) VALUES ($1,$2);";
+            client.query(sql, [params.patient_doctor_id, scheduleId], function (err) {
+                if (err) {
+                    console.error(err.message);
+                    return callback('Ошибка добавления новой записи в бд');
+                }
+                return callback(null);
+            });
+        }
+    ], function (err) {
+        client.end();
+        if (err) {
+            console.error(err);
+            return callback(err);
+        }
+        return callback(null);
+    });
+};
+
+/**
+ * Добавление доктора
+ * @param params.experience - стаж работы
+ * @param params.doctorTypeId - id специализации доктора
+ * @param callback
+ */
+module.exports.insertDoctor = function (params, callback) {
+    const client = new pg.Client(config.database.postgresql);
+    client.connect();
+    var sql = "INSERT INTO doctor (experience, doctor_type_id) values($1, $2) RETURNING id";
+    client.query(sql, [params.experience, params.doctorTypeId], function (err, req) {
+        client.end();
+        if (err) {
+            console.error(err.message);
+            return callback('Ошибка добавления нового пациента в бд');
+        }
+        return callback(null, req.rows[0].id);
+    });
+};
+
 
 /**
  * Получение расписания доктора
@@ -89,7 +151,7 @@ module.exports.getDoctors = function (params, callback) {
             console.error(err.message);
             return callback('Ошибка чтения докторов');
         }
-        console.error(res.rows);
+        console.log(res.rows);
         return callback(null, res.rows);
     });
 };

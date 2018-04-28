@@ -1,6 +1,6 @@
 "use strict";
 var config = {
-    name: 'API_GW',
+    name: 'server',
     listen: {
         host: '127.0.0.1',
         port: 3550
@@ -21,6 +21,11 @@ var config = {
             password: '7991',
             port: 5432
         }
+    },
+    module_pers_inf: {
+        name: 'PersonalInformation',
+        host: 'http://localhost',
+        port: 3555
     },
     logLevel: 4 //one of log levels error(0)-warning-log-info-debug-trace(5)
 };

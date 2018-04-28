@@ -1,30 +1,17 @@
-const pg = require('pg');
 var config = require('../config/mainConfig').config;
-var async = require('async');
-var _ = require('underscore');
+var request = require('request');
 
 /**
  * Получение расписания доктора
  * @param callback
  */
 module.exports.getScheduleDoctor = function (params, callback) {
-    console.log(params);
-    const client = new pg.Client(config.database.postgresql);
-    client.connect();
-    var sql = "select p.name, to_char(schedule.date_record, 'dd.mm.YYYY HH24:MI') as date from users " +
-        "INNER JOIN doctor ON users.patient_doctor_id = doctor.id " +
-        "INNER JOIN doctors_schedules ON doctor.id = doctors_schedules.doctor_id " +
-        "INNER JOIN schedule ON doctors_schedules.schedule_id = schedule.id " +
-        "INNER JOIN users as p ON schedule.user_patient_id = p.id " +
-        "where users.role_id = 3 and users.patient_doctor_id is not null and users.id = $1;";
-    client.query(sql, [params.id], function (err, res) {
-        client.end();
-        if (err) {
-            console.error(err.message);
-            return callback('Ошибка чтения докторов');
+    sendReq('GET', 'getScheduleDoctor/'+params.id, null, function (err, data) {
+        if (err || !data.result) {
+            console.error(err);
+            return callback('Ошибка получения записи из бд');
         }
-        console.error(res.rows);
-        return callback(null, res.rows);
+        return callback(null, data.data);
     });
 };
 
@@ -33,41 +20,26 @@ module.exports.getScheduleDoctor = function (params, callback) {
  * @param callback
  */
 module.exports.getDoctorTypes = function (callback) {
-    const client = new pg.Client(config.database.postgresql);
-    client.connect();
-    var sql = "select * from doctor_type;";
-    client.query(sql, function (err, res) {
-        client.end();
-        if (err) {
-            console.error(err.message);
-            return callback('Ошибка чтения клиентов');
+    sendReq('GET', 'getDoctorTypes', null, function (err, data) {
+        if (err || !data.result) {
+            console.error(err);
+            return callback('Ошибка получения записи из бд');
         }
-        console.error(res.rows);
-        return callback(null, res.rows);
+        return callback(null, data.data);
     });
 };
 
 /**
- * Получение информации о конкрутном докторе
+ * Получение информации о конкретном докторе
  * @param callback
  */
 module.exports.getDoctor = function (params, callback) {
-    console.log(params);
-    const client = new pg.Client(config.database.postgresql);
-    client.connect();
-    var sql = "select users.id, users.name, phone, email, to_char(date_reg, 'dd.mm.YYYY') as date, " +
-        "doctor.experience, doctor_type.name as type_name from users " +
-        "INNER JOIN doctor ON users.patient_doctor_id = doctor.id " +
-        "INNER JOIN doctor_type ON doctor.doctor_type_id = doctor_type.id " +
-        "where role_id = 3 and patient_doctor_id is not null and users.id = $1;";
-    client.query(sql, [params.id], function (err, res) {
-        client.end();
-        if (err) {
-            console.error(err.message);
-            return callback('Ошибка чтения докторов');
+    sendReq('GET', 'getDoctor/'+params.id, null, function (err, data) {
+        if (err || !data.result) {
+            console.error(err);
+            return callback('Ошибка получения записи из бд');
         }
-        console.error(res.rows);
-        return callback(null, res.rows[0]);
+        return callback(null, data.data);
     });
 };
 
@@ -76,20 +48,35 @@ module.exports.getDoctor = function (params, callback) {
  * @param callback
  */
 module.exports.getDoctors = function (params, callback) {
-    console.log(params);
-    const client = new pg.Client(config.database.postgresql);
-    client.connect();
-    var sql = "select users.id, users.name, doctor.experience, doctor_type.name as type_name from users " +
-        "INNER JOIN doctor ON users.patient_doctor_id = doctor.id " +
-        "INNER JOIN doctor_type ON doctor.doctor_type_id = doctor_type.id " +
-        "where role_id = 3 and patient_doctor_id is not null and users.name ilike $1;";
-    client.query(sql, ['%'+params.name+'%'], function (err, res) {
-        client.end();
-        if (err) {
-            console.error(err.message);
-            return callback('Ошибка чтения докторов');
+    sendReq('POST', 'getDoctors', {name: params.name}, function (err, data) {
+        if (err || !data.result) {
+            console.error(err);
+            return callback('Ошибка получения записи из бд');
         }
-        console.error(res.rows);
-        return callback(null, res.rows);
+        return callback(null, data.data);
     });
 };
+
+function sendReq(method, func, body, callback) {
+    var primaryUrl = config.module_pers_inf.host+':'+config.module_pers_inf.port+'/api/';
+    var reqParams = {
+        method: method,
+        url: primaryUrl+func,
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+    body ? reqParams.body = JSON.stringify(body) : null;
+    request(reqParams, function (err, res, body) {
+        if (err) {
+            return callback(err);
+        }
+        try {
+            body = JSON.parse(body);
+            console.log(body);
+        } catch (e) {
+            return callback('Ошибка при парсинге ответа');
+        }
+        return callback(null, body);
+    });
+}

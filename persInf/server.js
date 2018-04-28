@@ -23,23 +23,17 @@ app.listen(app.get('port'), app.get('host'), function (err) {
     if (err) {
         console.error('Ошибка при запуске сервера', err);
     } else {
-        console.info('Сервер API_GW запущен на порту ' + app.get('port'));
+        console.info('Сервер с персональными данными запущен на порту ' + app.get('port'));
     }
 });
 
-app.post(apiPrefix + '/registration', handler.regPatient);
-app.post(apiPrefix + '/authentication', handler.auth);
-app.get(apiPrefix + '/getLoggedUser', handler.getLoggedUser);
-app.get(apiPrefix + '/logout', handler.logout);
-app.post(apiPrefix + '/getPatients', handler.getPatients);
-app.post(apiPrefix + '/getDoctors', handler.getDoctors);
-app.get(apiPrefix + '/getPatient/:id', handler.getPatient);
-app.get(apiPrefix + '/getDoctor/:id', handler.getDoctor);
-app.get(apiPrefix + '/getDoctorTypes', handler.getDoctorTypes);
-app.post(apiPrefix + '/addWorker', handler.addWorker);
-app.post(apiPrefix + '/newEntryForAdmission', handler.newEntryForAdmission);
-app.get(apiPrefix + '/getNewRecords', handler.getNewRecords);
-app.post(apiPrefix + '/deleteRecord', handler.deleteRecord);
-app.post(apiPrefix + '/addRecord', handler.addRecord);
+app.post(apiPrefix + '/insertPatient', handler.insertPatient);
+app.post(apiPrefix + '/newSchedule', handler.newSchedule);
+app.post(apiPrefix + '/insertDoctor', handler.insertDoctor);
 app.get(apiPrefix + '/getScheduleDoctor/:id', handler.getScheduleDoctor);
+app.get(apiPrefix + '/getDoctorTypes', handler.getDoctorTypes);
+app.get(apiPrefix + '/getDoctor/:id', handler.getDoctor);
+app.post(apiPrefix + '/getDoctors', handler.getDoctors);
 app.delete(apiPrefix + '/deletePatient/:id', handler.deletePatient);
+app.get(apiPrefix + '/getPatient/:id', handler.getPatient);
+app.post(apiPrefix + '/getPatients', handler.getPatients);

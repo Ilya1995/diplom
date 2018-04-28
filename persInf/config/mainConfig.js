@@ -1,9 +1,9 @@
 "use strict";
 var config = {
-    name: 'API_GW',
+    name: 'PersonalInformation',
     listen: {
         host: '127.0.0.1',
-        port: 3550
+        port: 3555
     },
     database: {
         mysql: {

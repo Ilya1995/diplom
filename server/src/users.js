@@ -2,7 +2,7 @@ const pg = require('pg');
 var config = require('../config/mainConfig').config;
 var async = require('async');
 var moment = require('moment');
-var _ = require('underscore');
+var request = require('request');
 
 /**
  * Записать на приём к доктору
@@ -31,21 +31,10 @@ module.exports.addRecord = function (params,callback) {
             });
         },
         function (record, callback) {
-            var sql = "INSERT INTO schedule (user_patient_id,date_record) VALUES ($1,$2) RETURNING id;";
-            client.query(sql, [record.user_patient_id, record.date], function (err, res) {
-                if (err) {
-                    console.error(err.message);
-                    return callback('Ошибка добавления новой записи в бд');
-                }
-                console.log(res.rows[0].id, record.patient_doctor_id);
-                return callback(null, res.rows[0].id, record.patient_doctor_id);
-            });
-        },
-        function (scheduleId, doctorId, callback) {
-            var sql = "INSERT INTO doctors_schedules (doctor_id,schedule_id) VALUES ($1,$2);";
-            client.query(sql, [doctorId, scheduleId], function (err) {
-                if (err) {
-                    console.error(err.message);
+            sendReq('POST', 'newSchedule', {user_patient_id: record.user_patient_id,
+                patient_doctor_id: record.patient_doctor_id, date: record.date}, function (err, data) {
+                if (err || !data.result) {
+                    console.error(err);
                     return callback('Ошибка добавления новой записи в бд');
                 }
                 return callback(null);
@@ -198,14 +187,12 @@ module.exports.addWorker = function (params, callback) {
         },
         function (callback) {
             if (params.roleId!==1) {
-                var sql = "INSERT INTO doctor (experience, doctor_type_id) values($1, $2) RETURNING id";
-                client.query(sql, [params.experience, params.doctorTypeId], function (err, req) {
-                    if (err) {
-                        console.error(err.message);
+                sendReq('POST', 'insertDoctor', {experience: params.experience, doctorTypeId: params.doctorTypeId}, function (err, data) {
+                    if (err || !data.result) {
+                        console.error(err);
                         return callback('Ошибка добавления нового пациента в бд');
                     }
-                    console.log(req.rows[0]);
-                    return callback(null, req.rows[0].id);
+                    return callback(null, data.data);
                 });
             } else {
                 return callback(null, null);
@@ -232,3 +219,27 @@ module.exports.addWorker = function (params, callback) {
         return callback(null);
     });
 };
+
+function sendReq(method, func, body, callback) {
+    var primaryUrl = config.module_pers_inf.host+':'+config.module_pers_inf.port+'/api/';
+    var reqParams = {
+        method: method,
+        url: primaryUrl+func,
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+    body ? reqParams.body = JSON.stringify(body) : null;
+    request(reqParams, function (err, res, body) {
+        if (err) {
+            return callback(err);
+        }
+        try {
+            body = JSON.parse(body);
+            console.log(body);
+        } catch (e) {
+            return callback('Ошибка при парсинге ответа');
+        }
+        return callback(null, body);
+    });
+}

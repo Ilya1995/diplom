@@ -12,6 +12,9 @@
                             </ul>
                         </div>
                     </li>
+                    <li *ngIf="user && user.roleName=='Пациент'">
+                        <a class='NavLink' routerLink="/patient/{{user.id}}" routerLinkActive="active">Моя карта</a>
+                    </li>
                     <li *ngIf="user && user.roleName=='Администратор'">
                         <a class='NavLink' routerLink="/patients" routerLinkActive="active">Пациенты</a>
                     </li>
@@ -30,8 +33,17 @@
                     <li *ngIf="user && user.roleName=='Доктор'">
                         <a class='NavLink' routerLink="/schedule/{{user.id}}" routerLinkActive="active">Раписание</a>
                     </li>
-                    <li><a class='NavLink'>О нас</a></li>
-                    <li><a class='NavLink'>Контакты</a></li>
+                    <li><a class='NavLink'>О нас</a>
+                        <div>
+                            <ul>
+                                <li><a class='NavLink'>Услуги</a></li>
+                                <li><a class='NavLink'>Контакты</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a class='NavLink' routerLink="/license" routerLinkActive="active">Пользовательское соглашение</a>
+                    </li>
                 </ul>
                 <aunt-form *ngIf="!user" [user]="user" (isAunt)="isAunt($event)"></aunt-form>
                 <ul *ngIf="user" class='nav nav-right'>

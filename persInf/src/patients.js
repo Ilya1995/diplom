@@ -1,7 +1,27 @@
 const pg = require('pg');
 var config = require('../config/mainConfig').config;
 var async = require('async');
-var _ = require('underscore');
+
+/**
+ * Добавление пациента
+ * @param params.serial - серия паспорта
+ * @param params.number - номер паспорта
+ * @param callback
+ */
+module.exports.insertPatient = function (params, callback) {
+    const client = new pg.Client(config.database.postgresql);
+    client.connect();
+    var sql = "INSERT INTO patient (serial, number) values($1, $2) RETURNING id";
+    client.query(sql, [params.serial, params.number], function (err, req) {
+        client.end();
+        if (err) {
+            console.error(err.message);
+            return callback('Ошибка добавления нового пациента в бд');
+        }
+        console.log(req.rows[0]);
+        return callback(null, req.rows[0].id);
+    });
+};
 
 /**
  * Удаление пациента из БД
@@ -13,6 +33,16 @@ module.exports.deletePatient = function (params, callback) {
     client.connect();
 
     async.waterfall([
+        function (callback) {
+            var sql = "delete from patient where id = (select patient_doctor_id from users where id = $1);";
+            client.query(sql, [params.id], function (err) {
+                if (err) {
+                    console.error(err.message);
+                    return callback('Ошибка при удалении пациента');
+                }
+                return callback(null);
+            });
+        },
         function (callback) {
             var sql = "delete from users where id = $1;";
             client.query(sql, [params.id], function (err) {
@@ -41,28 +71,17 @@ module.exports.deletePatient = function (params, callback) {
 module.exports.getPatient = function (params, callback) {
     const client = new pg.Client(config.database.postgresql);
     client.connect();
-
-    async.waterfall([
-        function (callback) {
-            var sql = "select users.id, users.name, phone, email, to_char(date_reg, 'dd.mm.YYYY') as date, roles.name, " +
-                "patient.serial, patient.number from users INNER JOIN roles ON users.role_id = roles.id " +
-                "INNER JOIN patient ON users.patient_doctor_id = patient.id where role_id = 2 and " +
-                "patient_doctor_id is not null  and users.id = $1;";
-            client.query(sql, [params.id], function (err, res) {
-                if (err) {
-                    console.error(err.message);
-                    return callback('Ошибка чтения клиентов');
-                }
-                return callback(null, res.rows[0]);
-            });
-        }
-    ], function (err, data) {
+    var sql = "select users.id, users.name, phone, email, to_char(date_reg, 'dd.mm.YYYY') as date, roles.name, " +
+        "patient.serial, patient.number from users INNER JOIN roles ON users.role_id = roles.id " +
+        "INNER JOIN patient ON users.patient_doctor_id = patient.id where role_id = 2 and " +
+        "patient_doctor_id is not null  and users.id = $1;";
+    client.query(sql, [params.id], function (err, res) {
         client.end();
         if (err) {
-            console.error(err);
-            return callback(err);
+            console.error(err.message);
+            return callback('Ошибка чтения клиентов');
         }
-        return callback(null, data);
+        return callback(null, res.rows[0]);
     });
 };
 

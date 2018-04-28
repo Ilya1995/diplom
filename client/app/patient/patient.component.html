@@ -16,9 +16,9 @@
                 <label style="padding-top: 20px" class='text-label'>Номер паспорта</label>
                 <input readonly type='text' class='form-control' [(value)]="patient.number">
                 <div style="margin-top: 20px">
-                    <button>Записи пациента</button>
+                    <button>Записи к врачу</button>
                 </div>
-                <div class='footer' style="padding-bottom: 20px;">
+                <div *ngIf="user.roleName!='Пациент'" class='footer' style="padding-bottom: 20px;">
                     <a class='btn-r btn-blue btn-indent' routerLink="/patients" routerLinkActive="active">Назад</a>
                 </div>
             </div>

@@ -14,7 +14,13 @@ import {Router} from "@angular/router";
 export class RegistrationFormComponent {
     constructor(private router: Router, private service: UserService, private notificationService: NotificationService) {}
 
+    checkbox = null;
     private confirm(params) {
+        if (!this.checkbox) {
+            this.notificationService.showToast(new NotificationModel('Eггoгo', 'Необходимо ' +
+                'согласиться на обработку персональных данных'));
+            return;
+        }
         // if (!params.login || !params.pass1 || !params.pass2 || !params.name) {
         //     this.notificationService.showToast(new NotificationModel('Eггoгo', 'Заполните все поля'));
         //     return;

@@ -2,7 +2,6 @@
 const pg = require('pg');
 const config = require('../config/mainConfig').config;
 const async = require('async');
-const _ = require('underscore');
 
 module.exports.auth = function (params, callback) {
     console.log(params);

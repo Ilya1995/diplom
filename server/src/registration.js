@@ -3,6 +3,7 @@ const pg = require('pg');
 var config = require('../config/mainConfig').config;
 var async = require('async');
 var moment = require('moment');
+var request = require('request');
 
 /**
  * Регистрация нового клиента
@@ -35,14 +36,12 @@ module.exports.regPatient = function (params, callback) {
             });
         },
         function (callback) {
-            var sql = "INSERT INTO patient (serial, number) values($1, $2) RETURNING id";
-            client.query(sql, [params.serial, params.number], function (err, req) {
-                if (err) {
-                    console.error(err.message);
+            sendReq('POST', 'insertPatient', {serial: params.serial, number: params.number}, function (err, data) {
+                if (err || !data.result) {
+                    console.error(err);
                     return callback('Ошибка добавления нового пациента в бд');
                 }
-                console.log(req.rows[0]);
-                return callback(null, req.rows[0].id);
+                return callback(null, data.data);
             });
         },
         function (patientId, callback) {
@@ -66,3 +65,27 @@ module.exports.regPatient = function (params, callback) {
         return callback(null);
     });
 };
+
+function sendReq(method, func, body, callback) {
+    var primaryUrl = config.module_pers_inf.host+':'+config.module_pers_inf.port+'/api/';
+    var reqParams = {
+        method: method,
+        url: primaryUrl+func,
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+    body ? reqParams.body = JSON.stringify(body) : null;
+    request(reqParams, function (err, res, body) {
+        if (err) {
+            return callback(err);
+        }
+        try {
+            body = JSON.parse(body);
+            console.log(body);
+        } catch (e) {
+            return callback('Ошибка при парсинге ответа');
+        }
+        return callback(null, body);
+    });
+}

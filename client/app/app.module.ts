@@ -5,7 +5,7 @@ import { HttpModule } from "@angular/http";
 import { AppComponent } from "./app.component";
 import { NavMenuComponent, AuntFormComponent, RegistrationFormComponent, PatientComponent, CreateWorkerFormComponent,
     NotificationComponent, PopupComponent, PatientsTableComponent, routing, HomeComponent, DoctorTableComponent,
-    DoctorComponent, NewRecordsComponent, ScheduleComponent} from "./index";
+    DoctorComponent, NewRecordsComponent, ScheduleComponent, LicenseComponent} from "./index";
 import { UserService } from "./services/user.service";
 import { PopupService } from "./services/popup.service";
 import { NotificationService } from "./services/notification.service";
@@ -20,7 +20,7 @@ import { ParamsModel } from "./services/paramsModel";
     declarations: [
         AppComponent, NavMenuComponent, AuntFormComponent, PatientsTableComponent, HomeComponent, CreateWorkerFormComponent,
         RegistrationFormComponent, NotificationComponent, PopupComponent, PatientComponent, DoctorTableComponent,
-        DoctorComponent, NewRecordsComponent, ScheduleComponent],
+        DoctorComponent, NewRecordsComponent, ScheduleComponent, LicenseComponent],
     providers: [UserService, PopupService, NotificationService, ParamsModel],
     bootstrap: [AppComponent]
 })
