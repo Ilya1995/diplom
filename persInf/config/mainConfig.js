@@ -22,6 +22,7 @@ var config = {
             port: 5432
         }
     },
+    key: '123',
     logLevel: 4 //one of log levels error(0)-warning-log-info-debug-trace(5)
 };
 config.env=process.env.NODE_ENV || 'dev';

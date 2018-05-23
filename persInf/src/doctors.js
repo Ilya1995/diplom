@@ -15,8 +15,10 @@ module.exports.newSchedule = function (params, callback) {
     client.connect();
     async.waterfall([
         function (callback) {
-            var sql = "INSERT INTO schedule (user_patient_id, date_record) VALUES ($1,$2) RETURNING id;";
-            client.query(sql, [params.user_patient_id, params.date], function (err, res) {
+            var sql = "INSERT INTO schedule (user_patient_id, date_record) VALUES (" +
+                "pgp_sym_encrypt($1, $2, 'compress-algo=0, cipher-algo=grasshopper')," +
+                "pgp_sym_encrypt($3, $4, 'compress-algo=0, cipher-algo=grasshopper')) RETURNING id;";
+            client.query(sql, [params.user_patient_id, config.key, params.date, config.key], function (err, res) {
                 if (err) {
                     console.error(err.message);
                     return callback('Ошибка добавления новой записи в бд');
@@ -73,13 +75,13 @@ module.exports.getScheduleDoctor = function (params, callback) {
     console.log(params);
     const client = new pg.Client(config.database.postgresql);
     client.connect();
-    var sql = "select p.name, to_char(schedule.date_record, 'dd.mm.YYYY HH24:MI') as date from users " +
+    var sql = "select p.name, pgp_sym_decrypt(schedule.date_record,  $1, 'compress-algo=0, cipher-algo=grasshopper') as date from users " +
         "INNER JOIN doctor ON users.patient_doctor_id = doctor.id " +
         "INNER JOIN doctors_schedules ON doctor.id = doctors_schedules.doctor_id " +
         "INNER JOIN schedule ON doctors_schedules.schedule_id = schedule.id " +
-        "INNER JOIN users as p ON schedule.user_patient_id = p.id " +
-        "where users.role_id = 3 and users.patient_doctor_id is not null and users.id = $1;";
-    client.query(sql, [params.id], function (err, res) {
+        "INNER JOIN users as p ON CAST(pgp_sym_decrypt(schedule.user_patient_id,  $2, 'compress-algo=0, cipher-algo=grasshopper') AS integer) = p.id " +
+        "where users.role_id = 3 and users.patient_doctor_id is not null and users.id = $3;";
+    client.query(sql, [config.key, config.key, params.id], function (err, res) {
         client.end();
         if (err) {
             console.error(err.message);
@@ -110,7 +112,7 @@ module.exports.getDoctorTypes = function (callback) {
 };
 
 /**
- * Получение информации о конкрутном докторе
+ * Получение информации о докторе
  * @param callback
  */
 module.exports.getDoctor = function (params, callback) {
@@ -128,7 +130,7 @@ module.exports.getDoctor = function (params, callback) {
             console.error(err.message);
             return callback('Ошибка чтения докторов');
         }
-        console.error(res.rows);
+        console.log(res.rows);
         return callback(null, res.rows[0]);
     });
 };

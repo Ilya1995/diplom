@@ -4,7 +4,7 @@ exports.up = function(db, callback) {
     async.series([
         function (callback) {
             var sql = "CREATE TABLE IF NOT EXISTS schedule (id SERIAL PRIMARY KEY, " +
-                "user_patient_id INT NOT NULL, date_record TIMESTAMP);";
+                "user_patient_id bytea NOT NULL, date_record bytea);";//INT //TIMESTAMP
             db.runSql(sql, function (err) {
                 if (err) {
                     console.error('error1');

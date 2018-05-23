@@ -11,8 +11,9 @@ var async = require('async');
 module.exports.insertPatient = function (params, callback) {
     const client = new pg.Client(config.database.postgresql);
     client.connect();
-    var sql = "INSERT INTO patient (serial, number) values($1, $2) RETURNING id";
-    client.query(sql, [params.serial, params.number], function (err, req) {
+    var sql = "INSERT INTO patient (serial, number) values(pgp_sym_encrypt($1, $2, 'compress-algo=0, cipher-algo=grasshopper'), " +
+        "pgp_sym_encrypt($3, $4, 'compress-algo=0, cipher-algo=grasshopper')) RETURNING id";
+    client.query(sql, [params.serial, config.key, params.number, config.key], function (err, req) {
         client.end();
         if (err) {
             console.error(err.message);
@@ -72,10 +73,12 @@ module.exports.getPatient = function (params, callback) {
     const client = new pg.Client(config.database.postgresql);
     client.connect();
     var sql = "select users.id, users.name, phone, email, to_char(date_reg, 'dd.mm.YYYY') as date, roles.name, " +
-        "patient.serial, patient.number from users INNER JOIN roles ON users.role_id = roles.id " +
+        "pgp_sym_decrypt(patient.serial,  $1, 'compress-algo=0, cipher-algo=grasshopper') as serial, " +
+        "pgp_sym_decrypt(patient.number,  $2, 'compress-algo=0, cipher-algo=grasshopper') as number " +
+        "from users INNER JOIN roles ON users.role_id = roles.id " +
         "INNER JOIN patient ON users.patient_doctor_id = patient.id where role_id = 2 and " +
-        "patient_doctor_id is not null  and users.id = $1;";
-    client.query(sql, [params.id], function (err, res) {
+        "patient_doctor_id is not null  and users.id = $3;";
+    client.query(sql, [config.key,config.key,params.id], function (err, res) {
         client.end();
         if (err) {
             console.error(err.message);
@@ -86,7 +89,7 @@ module.exports.getPatient = function (params, callback) {
 };
 
 /**
- * Получение общей информации о пациентах
+ * Получение информации о пациентах
  * @param callback
  */
 module.exports.getPatients = function (params, callback) {
